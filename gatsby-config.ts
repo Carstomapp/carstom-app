@@ -4,8 +4,8 @@ import { paths } from './src/constants';
 const config: GatsbyConfig = {
   pathPrefix: paths.GATSBY_PATH_PREFIX,
   siteMetadata: {
-    title: 'laksby',
-    siteUrl: 'https://laksby.github.io/sandbox/',
+    title: 'Carstom',
+    siteUrl: 'https://Carstomapp.github.io/carstom-app/',
   },
   graphqlTypegen: true,
   plugins: [

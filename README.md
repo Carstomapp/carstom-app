@@ -1,10 +1,10 @@
-# Sandbox
+# Carstom App
 
-![status](https://github.com/laksby/sandbox/actions/workflows/gatsby.yml/badge.svg?branch=main)
+![status](https://github.com/Carstomapp/carstom-app/actions/workflows/gatsby.yml/badge.svg?branch=main)
 
-This repository contains source code for sandbox template.
+This repository contains the source code of main frontend application for Carstom.
 
-[Link to Preview](https://laksby.github.io/sandbox/)
+[Link to Preview](https://Carstomapp.github.io/carstom-app/)
 
 ## Setup
 
@@ -12,9 +12,9 @@ Clone repository
 
 ```bash
 # ssh
-git clone git@github.com:laksby/sandbox.git
+git clone git@github.com:Carstomapp/carstom-app.git
 # https
-git clone https://github.com/laksby/sandbox.git
+git clone https://github.com/Carstomapp/carstom-app.git
 ```
 
 Install dependencies

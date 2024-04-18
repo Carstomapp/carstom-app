@@ -1,7 +1,7 @@
 {
-  "name": "sandbox",
+  "name": "carstom-app",
   "version": "1.0.0",
-  "description": "Sandbox project template for various purposes",
+  "description": "Main frontend application for Carstom",
   "private": true,
   "scripts": {
     "develop": "gatsby develop",

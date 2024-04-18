@@ -1,7 +1,12 @@
 import { FC } from 'react';
+import { SplashLogo } from '../components';
 
 export const IndexPage: FC = () => {
-  return <main className="tw-p-4 tw-min-h-screen">Home Page</main>;
+  return (
+    <main className="tw-h-screen tw-flex tw-flex-col tw-items-stretch tw-justify-center">
+      <SplashLogo />
+    </main>
+  );
 };
 
 export default IndexPage;

@@ -21,11 +21,11 @@ module.exports = {
         'splash-logo-foreground-open': {
           '0%': {
             opacity: '0',
-            transform: 'translate(100%, -50%)',
+            transform: 'translateX(100%)',
           },
           '100%': {
             opacity: '1',
-            transform: 'translate(0, -50%)',
+            transform: 'translateX(0)',
           },
         },
         'splash-logo-shine': {

@@ -7,10 +7,13 @@ export const SplashLogo: FC = () => {
         className="tw-max-h-dvh tw-w-full tw-h-auto tw-object-contain tw-animate-splash-logo-background"
         src="images/logo_back.png"
       />
-      <div className="tw-absolute tw-flex tw-items-center tw-w-full tw-top-1/2 tw-translate-y-[-50%] tw-animate-splash-logo-foreground-open">
-        <img className="tw-max-h-dvh tw-w-full tw-h-auto tw-object-contain" src="images/logo_front.png" />
+      <div className="tw-absolute tw-flex tw-items-center tw-w-full tw-top-1/2 tw-animate-splash-logo-foreground-open">
+        <img
+          className="tw-max-h-dvh tw-w-full tw-h-auto tw-object-contain tw-translate-y-[-50%]"
+          src="images/logo_front.png"
+        />
         <div
-          className="tw-absolute tw-inset-0"
+          className="tw-absolute tw-inset-0 tw-translate-y-[-50%]"
           style={{
             mask: 'url(images/logo_front.png)',
             maskSize: 'contain',

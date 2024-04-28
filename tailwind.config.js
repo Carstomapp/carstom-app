@@ -5,28 +5,28 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        'splash-logo-background': 'splash-logo-background 500ms ease-in-out',
-        'splash-logo-foreground-open': 'splash-logo-foreground-open 500ms ease-in-out',
+        'splash-logo-background-open': 'splash-logo-background-open 500ms ease-in-out forwards',
+        'splash-logo-background-close': 'splash-logo-background-close 500ms ease-in-out forwards',
+        'splash-logo-foreground-open': 'splash-logo-foreground-open 500ms ease-in-out forwards',
+        'splash-logo-foreground-close': 'splash-logo-foreground-close 500ms ease-in-out forwards',
         'splash-logo-shine': '500ms splash-logo-shine 500ms ease-in-out',
       },
       keyframes: {
-        'splash-logo-background': {
-          '0%': {
-            opacity: '0',
-          },
-          '100%': {
-            opacity: '1',
-          },
+        'splash-logo-background-open': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        'splash-logo-background-close': {
+          '0%': { opacity: '1' },
+          '100%': { opacity: '0' },
         },
         'splash-logo-foreground-open': {
-          '0%': {
-            opacity: '0',
-            transform: 'translateX(100%)',
-          },
-          '100%': {
-            opacity: '1',
-            transform: 'translateX(0)',
-          },
+          '0%': { opacity: '0', transform: 'translateX(100%)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
+        'splash-logo-foreground-close': {
+          '0%': { opacity: '1', transform: 'translateX(0)' },
+          '100%': { opacity: '0', transform: 'translateX(-100%)' },
         },
         'splash-logo-shine': {
           '0%': {

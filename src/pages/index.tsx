@@ -1,28 +1,21 @@
-import { FC, useCallback, useEffect, useRef, useState } from 'react';
+import { FC, useCallback, useEffect } from 'react';
 import { SplashLogo } from '../components';
+import { useCoreService } from '../services/CoreService';
 
 export const IndexPage: FC = () => {
-  const [splashOpen, setSplashOpen] = useState(false);
-  const timeoutRef = useRef<NodeJS.Timeout>();
+  const coreService = useCoreService();
 
   useEffect(() => {
-    setSplashOpen(true);
-
-    return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-        timeoutRef.current = undefined;
-      }
-    };
+    coreService.openSplash();
   }, []);
 
-  const onSplashOpened = useCallback(() => {
-    timeoutRef.current = setTimeout(() => setSplashOpen(false), 3000);
-  }, [setSplashOpen]);
+  const onSplashOpened = useCallback(async () => {
+    await coreService.loadLookups();
+  }, []);
 
   return (
     <main className="tw-h-dvh tw-flex tw-flex-col tw-items-stretch tw-justify-center">
-      <SplashLogo open={splashOpen} onOpened={onSplashOpened} />
+      <SplashLogo open={coreService.splashOpen} onOpened={onSplashOpened} />
     </main>
   );
 };

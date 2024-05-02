@@ -45,7 +45,7 @@ export const SplashLogo: FC<Props> = props => {
   }, [open]);
 
   return (
-    <div className="tw-relative tw-overflow-hidden">
+    <div className="tw-absolute tw-inset-0 tw-flex tw-flex-col tw-items-stretch tw-justify-center tw-overflow-hidden">
       <img
         className={clsx(
           'tw-max-h-dvh tw-w-full tw-h-auto tw-object-contain',

@@ -2,21 +2,32 @@ import { create } from 'zustand';
 import { VehiclesApi } from '../api/VehiclesApi';
 
 export interface CoreService {
-  splashOpen: boolean;
-  openSplash(): void;
-  closeSplash(): void;
+  step: CoreStep;
+  start(): void;
+  goTo(step: CoreStep): void;
   loadLookups(): Promise<void>;
+  saveVehicleParameters(): void;
 }
 
+export type CoreStep = 'initial' | 'splash' | 'setup' | 'spinner';
+
 export const useCoreService = create<CoreService>((set, get) => ({
-  splashOpen: false,
+  step: 'initial',
 
-  openSplash: () => set({ splashOpen: true }),
+  start: () => {
+    get().goTo('splash');
+  },
 
-  closeSplash: () => set({ splashOpen: false }),
+  goTo: (step: CoreStep) => {
+    set({ step });
+  },
 
   loadLookups: async () => {
     await VehiclesApi.getMakes();
-    get().closeSplash();
+    get().goTo('setup');
+  },
+
+  saveVehicleParameters: () => {
+    get().goTo('spinner');
   },
 }));

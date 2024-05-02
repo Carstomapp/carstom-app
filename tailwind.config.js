@@ -8,7 +8,14 @@ module.exports = {
     },
     extend: {
       spacing: {
-        'dvh/2': '50dvh',
+        '30dvh': '30dvh',
+        '40dvh': '40dvh',
+        '50dvh': '50dvh',
+        '60dvh': '60dvh',
+        '70dvh': '70dvh',
+      },
+      colors: {
+        primary: '#D0B88A',
       },
       backgroundImage: {
         panel:

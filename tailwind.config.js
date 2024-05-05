@@ -16,6 +16,7 @@ module.exports = {
       },
       colors: {
         primary: '#D0B88A',
+        action: '#926F44',
       },
       backgroundImage: {
         panel:
@@ -27,8 +28,11 @@ module.exports = {
         'splash-logo-foreground-open': 'splash-logo-foreground-open 500ms ease-in-out forwards',
         'splash-logo-foreground-close': 'splash-logo-foreground-close 500ms ease-in-out forwards',
         'splash-logo-shine-open': '500ms splash-logo-shine-open 500ms ease-in-out forwards',
+        'splash-logo-shine-close': 'splash-logo-shine-close 500ms ease-in-out forwards',
         'core-step-open': 'core-step-open 500ms ease-in-out forwards',
         'core-step-close': 'core-step-close 500ms ease-in-out forwards',
+        'core-step-image-open': 'core-step-image-open 500ms ease-in-out forwards',
+        'core-step-image-close': 'core-step-image-close 500ms ease-in-out forwards',
       },
       keyframes: {
         'splash-logo-background-open': {
@@ -54,6 +58,10 @@ module.exports = {
           '90%': { opacity: '0.1' },
           '100%': { opacity: '0', transform: 'translateX(-100%)' },
         },
+        'splash-logo-shine-close': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '0' },
+        },
         'core-step-open': {
           '0%': { opacity: '0', transform: 'translateX(100%)' },
           '100%': { opacity: '1', transform: 'translateX(0)' },
@@ -61,6 +69,14 @@ module.exports = {
         'core-step-close': {
           '0%': { opacity: '1', transform: 'translateX(0)' },
           '100%': { opacity: '0', transform: 'translateX(-100%)' },
+        },
+        'core-step-image-open': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        'core-step-image-close': {
+          '0%': { opacity: '1' },
+          '100%': { opacity: '0' },
         },
       },
     },

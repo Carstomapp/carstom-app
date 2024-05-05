@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import { CSSProperties, FC, PropsWithChildren, useCallback, useEffect, useState } from 'react';
-import { Logger } from '../../utils/Logger';
+import { FC, PropsWithChildren } from 'react';
+import { useAnimation } from '../../hooks';
 
 interface Props {
   className?: string;
@@ -12,42 +12,21 @@ interface Props {
 export const CoreStep: FC<PropsWithChildren<Props>> = props => {
   const { className, open, onOpened, onClosed, children } = props;
 
-  const [playState, setPlayState] = useState<CSSProperties['animationPlayState']>('paused');
-  const [idleState, setIdleState] = useState<CSSProperties['animationPlayState']>('paused');
-  const [playForward, setPlayForward] = useState(true);
-
-  const onAnimationEnd = useCallback(() => {
-    setPlayState('paused');
-    setPlayForward(true);
-
-    if (playForward) {
-      Logger.info('End step open animation');
-      onOpened?.();
-    } else {
-      Logger.info('End step close animation');
-      onClosed?.();
-    }
-  }, [onOpened, onClosed, playForward, setPlayState, setPlayForward]);
-
-  useEffect(() => {
-    if (open && idleState === 'paused') {
-      Logger.info('Start step open animation');
-      setPlayForward(true);
-      setPlayState('running');
-      setIdleState('running');
-    }
-
-    if (!open && idleState === 'running') {
-      Logger.info('Start step close animation');
-      setPlayForward(false);
-      setPlayState('running');
-      setIdleState('paused');
-    }
-  }, [open]);
+  const { playState, playForward, hidden, onAnimationEnd } = useAnimation({
+    title: 'step',
+    open,
+    onOpened,
+    onClosed,
+  });
 
   return (
     <div
-      className={clsx(className, playForward ? 'tw-animate-core-step-open' : 'tw-animate-core-step-close')}
+      className={clsx(
+        className,
+        'tw-absolute tw-inset-0 tw-flex tw-flex-col tw-items-stretch tw-justify-center',
+        hidden && 'tw-hidden',
+        playForward ? 'tw-animate-core-step-open' : 'tw-animate-core-step-close',
+      )}
       style={{
         animationPlayState: playState,
       }}

@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import { CSSProperties, FC, useCallback, useEffect, useState } from 'react';
-import { Logger } from '../../utils/Logger';
+import { FC } from 'react';
+import { useAnimation } from '../../hooks';
 
 interface Props {
   open: boolean;
@@ -11,38 +11,12 @@ interface Props {
 export const SplashLogo: FC<Props> = props => {
   const { open, onOpened, onClosed } = props;
 
-  const [playState, setPlayState] = useState<CSSProperties['animationPlayState']>('paused');
-  const [idleState, setIdleState] = useState<CSSProperties['animationPlayState']>('paused');
-  const [playForward, setPlayForward] = useState(true);
-
-  const onAnimationEnd = useCallback(() => {
-    setPlayState('paused');
-    setPlayForward(true);
-
-    if (playForward) {
-      Logger.info('End splash open animation');
-      onOpened?.();
-    } else {
-      Logger.info('End splash close animation');
-      onClosed?.();
-    }
-  }, [onOpened, onClosed, playForward, setPlayState, setPlayForward]);
-
-  useEffect(() => {
-    if (open && idleState === 'paused') {
-      Logger.info('Start splash open animation');
-      setPlayForward(true);
-      setPlayState('running');
-      setIdleState('running');
-    }
-
-    if (!open && idleState === 'running') {
-      Logger.info('Start splash close animation');
-      setPlayForward(false);
-      setPlayState('running');
-      setIdleState('paused');
-    }
-  }, [open]);
+  const { playState, playForward, onAnimationEnd } = useAnimation({
+    title: 'splash',
+    open,
+    onOpened,
+    onClosed,
+  });
 
   return (
     <div className="tw-absolute tw-inset-0 tw-flex tw-flex-col tw-items-stretch tw-justify-center tw-overflow-hidden">
@@ -75,7 +49,10 @@ export const SplashLogo: FC<Props> = props => {
             maskSize: 'contain',
           }}>
           <div
-            className="tw-flex tw-justify-end tw-items-stretch tw-w-full tw-h-full tw-transform-gpu tw-opacity-0 tw-animate-splash-logo-shine-open"
+            className={clsx(
+              'tw-flex tw-justify-end tw-items-stretch tw-w-full tw-h-full tw-transform-gpu tw-opacity-0',
+              playForward ? 'tw-animate-splash-logo-shine-open' : 'tw-animate-splash-logo-shine-close',
+            )}
             style={{
               animationPlayState: playState,
             }}

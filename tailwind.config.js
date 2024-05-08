@@ -40,6 +40,7 @@ module.exports = {
         'core-step-close': 'core-step-close 500ms ease-in-out forwards',
         'core-step-image-open': 'core-step-image-open 500ms ease-in-out forwards',
         'core-step-image-close': 'core-step-image-close 500ms ease-in-out forwards',
+        'backdrop-open': 'backdrop-open 150ms ease-in-out forwards',
       },
       keyframes: {
         'splash-logo-background-open': {
@@ -84,6 +85,10 @@ module.exports = {
         'core-step-image-close': {
           '0%': { opacity: '1' },
           '100%': { opacity: '0' },
+        },
+        'backdrop-open': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '0.5' },
         },
       },
     },

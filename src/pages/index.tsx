@@ -25,13 +25,21 @@ export const IndexPage: FC = () => {
         <Panel head="Select your car" className="tw-mt-8">
           <p>We need to ensure that the wheel selection matches your car</p>
           <FormField>
-            <Dropdown placeholder="Make" />
+            <Dropdown
+              placeholder="Make"
+              items={[
+                { text: 'AUDI', value: 'AUDI' },
+                { text: 'BMW', value: 'BMW' },
+                { text: 'MERCEDES-BENZ', value: 'MERCEDES-BENZ' },
+                { text: 'TOYOTA', value: 'TOYOTA' },
+              ]}
+            />
           </FormField>
           <FormField>
-            <Dropdown placeholder="Model" />
+            <Dropdown placeholder="Model" items={[]} />
           </FormField>
           <FormField>
-            <Dropdown placeholder="Year" />
+            <Dropdown placeholder="Year" items={[]} />
           </FormField>
         </Panel>
         <div className="tw-flex tw-items-center tw-justify-end tw-mt-4">

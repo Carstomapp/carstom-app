@@ -16,5 +16,5 @@ body {
 }
 
 p {
-  @apply tw-mb-2;
+  @apply tw-mb-6;
 }

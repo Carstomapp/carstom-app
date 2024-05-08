@@ -1,5 +1,5 @@
 import { FC, useCallback, useEffect } from 'react';
-import { Button, CoreStep, CoreStepImage, Panel, SplashLogo } from '../components';
+import { Button, CoreStep, CoreStepImage, Dropdown, FormField, Panel, SplashLogo } from '../components';
 import { useCoreService } from '../services/CoreService';
 
 export const IndexPage: FC = () => {
@@ -24,6 +24,15 @@ export const IndexPage: FC = () => {
       <CoreStep open={coreService.step === 'setup'} className="tw-p-6">
         <Panel head="Select your car" className="tw-mt-8">
           <p>We need to ensure that the wheel selection matches your car</p>
+          <FormField>
+            <Dropdown placeholder="Make" />
+          </FormField>
+          <FormField>
+            <Dropdown placeholder="Model" />
+          </FormField>
+          <FormField>
+            <Dropdown placeholder="Year" />
+          </FormField>
         </Panel>
         <div className="tw-flex tw-items-center tw-justify-end tw-mt-4">
           <Button onClick={onProceed}>Proceed</Button>

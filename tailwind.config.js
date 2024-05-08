@@ -17,6 +17,7 @@ module.exports = {
       colors: {
         primary: '#D0B88A',
         action: '#926F44',
+        input: '#1D1D1D',
       },
       backgroundImage: {
         panel:

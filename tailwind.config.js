@@ -7,6 +7,10 @@ module.exports = {
       sans: ['Saira', 'Helvetica', 'Arial', 'sans-serif'],
     },
     extend: {
+      zIndex: {
+        'dropdown-backdrop': 900,
+        'dropdown-opened': 1000,
+      },
       spacing: {
         '30dvh': '30dvh',
         '40dvh': '40dvh',
@@ -18,6 +22,8 @@ module.exports = {
         primary: '#D0B88A',
         action: '#926F44',
         input: '#1D1D1D',
+        'input-divider': '#7B7272',
+        'input-focus': '#928F8CA1',
       },
       backgroundImage: {
         panel:

@@ -33,13 +33,15 @@ export const IndexPage: FC = () => {
                 { text: 'MERCEDES-BENZ', value: 'MERCEDES-BENZ' },
                 { text: 'TOYOTA', value: 'TOYOTA' },
               ]}
+              value={coreService.make}
+              onChange={coreService.setMake}
             />
           </FormField>
           <FormField>
-            <Dropdown placeholder="Model" items={[]} />
+            <Dropdown placeholder="Model" items={[]} value={coreService.model} onChange={coreService.setModel} />
           </FormField>
           <FormField>
-            <Dropdown placeholder="Year" items={[]} />
+            <Dropdown placeholder="Year" items={[]} value={coreService.year} onChange={coreService.setYear} />
           </FormField>
         </Panel>
         <div className="tw-flex tw-items-center tw-justify-end tw-mt-4">

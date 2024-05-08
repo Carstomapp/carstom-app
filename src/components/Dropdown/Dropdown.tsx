@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { FC, useCallback, useRef, useState } from 'react';
+import { FC, useCallback, useMemo, useRef, useState } from 'react';
 import useClickAway from 'react-use/lib/useClickAway';
 import { DropdownArrow } from './DropdownArrow';
 
@@ -7,6 +7,8 @@ interface Props {
   placeholder?: string;
   emptyPlaceholder?: string;
   items: ItemProps[];
+  value?: string;
+  onChange(value: string): void;
 }
 
 interface ItemProps {
@@ -15,12 +17,22 @@ interface ItemProps {
 }
 
 export const Dropdown: FC<Props> = props => {
-  const { placeholder, emptyPlaceholder = 'No items', items } = props;
+  const { placeholder, emptyPlaceholder = 'No items', items, value, onChange } = props;
 
   const [opened, setOpened] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const onInputClick = useCallback(() => setOpened(value => !value), [setOpened]);
+
+  const onItemClick = useCallback(
+    (item: ItemProps) => {
+      onChange(item.value);
+      setOpened(false);
+    },
+    [setOpened, onChange],
+  );
+
+  const selectedItem = useMemo(() => items.find(item => item.value === value), [items]);
 
   useClickAway(containerRef, () => setOpened(false));
 
@@ -40,6 +52,7 @@ export const Dropdown: FC<Props> = props => {
           readOnly
           placeholder={placeholder}
           onClick={onInputClick}
+          defaultValue={selectedItem?.text}
         />
         <div
           onClick={onInputClick}
@@ -53,7 +66,10 @@ export const Dropdown: FC<Props> = props => {
               <ul>
                 {items.length > 0 ? (
                   items.map(item => (
-                    <li key={item.value} className="tw-h-10 tw-px-4 tw-flex tw-items-center">
+                    <li
+                      key={item.value}
+                      className="tw-h-10 tw-px-4 tw-flex tw-items-center"
+                      onClick={() => onItemClick(item)}>
                       {item.text}
                     </li>
                   ))

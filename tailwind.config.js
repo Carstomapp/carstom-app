@@ -24,6 +24,7 @@ module.exports = {
         input: '#1D1D1D',
         'input-divider': '#7B7272',
         'input-focus': '#928F8CA1',
+        'button-disabled': '#595959',
       },
       backgroundImage: {
         panel:

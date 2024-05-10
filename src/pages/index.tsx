@@ -1,9 +1,10 @@
 import { FC, useCallback, useEffect } from 'react';
 import { Button, CoreStep, CoreStepImage, Dropdown, FormField, Panel, SplashLogo } from '../components';
-import { useCoreService } from '../services/CoreService';
+import { CoreService } from '../services/CoreService';
 
 export const IndexPage: FC = () => {
-  const coreService = useCoreService();
+  const coreService = CoreService.use();
+  const isValidSetup = CoreService.selectors.isValidSetup();
 
   useEffect(() => {
     coreService.start();
@@ -18,7 +19,7 @@ export const IndexPage: FC = () => {
   }, []);
 
   return (
-    <main className="tw-h-dvh tw-relative">
+    <main className="tw-h-dvh tw-relative tw-overflow-hidden">
       <SplashLogo open={coreService.step === 'splash'} onOpened={onSplashOpened} />
 
       <CoreStep open={coreService.step === 'setup'} className="tw-p-6">
@@ -38,14 +39,26 @@ export const IndexPage: FC = () => {
             />
           </FormField>
           <FormField>
-            <Dropdown placeholder="Model" items={[]} value={coreService.model} onChange={coreService.setModel} />
+            <Dropdown
+              placeholder="Model"
+              items={[{ text: 'Test', value: 'Test' }]}
+              value={coreService.model}
+              onChange={coreService.setModel}
+            />
           </FormField>
           <FormField>
-            <Dropdown placeholder="Year" items={[]} value={coreService.year} onChange={coreService.setYear} />
+            <Dropdown
+              placeholder="Year"
+              items={[{ text: '2004', value: '2004' }]}
+              value={coreService.year}
+              onChange={coreService.setYear}
+            />
           </FormField>
         </Panel>
         <div className="tw-flex tw-items-center tw-justify-end tw-mt-4">
-          <Button onClick={onProceed}>Proceed</Button>
+          <Button disabled={!isValidSetup} onClick={onProceed}>
+            Proceed
+          </Button>
         </div>
       </CoreStep>
       <CoreStep open={coreService.step === 'spinner'} className="tw-p-6">

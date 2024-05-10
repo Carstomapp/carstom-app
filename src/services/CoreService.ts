@@ -17,36 +17,44 @@ export interface CoreService {
 
 export type CoreStep = 'initial' | 'splash' | 'setup' | 'spinner';
 
-export const useCoreService = create<CoreService>((set, get) => ({
-  step: 'initial',
-  make: undefined,
+export const CoreService = {
+  use: create<CoreService>((set, get) => ({
+    step: 'initial',
+    make: undefined,
+    model: undefined,
+    year: undefined,
 
-  start: () => {
-    get().goTo('splash');
-  },
+    start: () => {
+      get().goTo('splash');
+    },
 
-  goTo: (step: CoreStep) => {
-    set({ step });
-  },
+    goTo: (step: CoreStep) => {
+      set({ step });
+    },
 
-  loadLookups: async () => {
-    await VehiclesApi.getMakes();
-    get().goTo('setup');
-  },
+    loadLookups: async () => {
+      await VehiclesApi.getMakes();
+      get().goTo('setup');
+    },
 
-  setMake: (make?: string) => {
-    set({ make });
-  },
+    setMake: (make?: string) => {
+      set({ make });
+    },
 
-  setModel: (model?: string) => {
-    set({ model });
-  },
+    setModel: (model?: string) => {
+      set({ model });
+    },
 
-  setYear: (year?: string) => {
-    set({ year });
-  },
+    setYear: (year?: string) => {
+      set({ year });
+    },
 
-  saveVehicleParameters: () => {
-    get().goTo('spinner');
+    saveVehicleParameters: () => {
+      get().goTo('spinner');
+    },
+  })),
+
+  selectors: {
+    isValidSetup: () => CoreService.use(state => !!state.make && !!state.model && !!state.year),
   },
-}));
+};

@@ -26,6 +26,7 @@ module.exports = {
         'input-focus': '#928F8CA1',
         'button-disabled': '#595959',
         'list-item-active': '#D7D7D70D',
+        'scroll-bar': '#D9D9D9',
       },
       backgroundImage: {
         panel:

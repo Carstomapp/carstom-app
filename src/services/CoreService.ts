@@ -33,7 +33,7 @@ export const CoreService = {
     },
 
     loadLookups: async () => {
-      await VehiclesApi.getMakes();
+      await VehiclesApi.getBrands();
       get().goTo('setup');
     },
 

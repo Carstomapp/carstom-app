@@ -18,3 +18,19 @@ body {
 p {
   @apply tw-mb-6;
 }
+
+::-webkit-scrollbar {
+  @apply tw-w-0.5;
+}
+
+::-webkit-scrollbar-track {
+  @apply tw-bg-transparent tw-border-2 tw-border-solid tw-border-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply tw-bg-scroll-bar tw-rounded;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply tw-bg-scroll-bar;
+}

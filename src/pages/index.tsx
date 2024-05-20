@@ -33,6 +33,13 @@ export const IndexPage: FC = () => {
                 { text: 'BMW', value: 'BMW' },
                 { text: 'MERCEDES-BENZ', value: 'MERCEDES-BENZ' },
                 { text: 'TOYOTA', value: 'TOYOTA' },
+                { text: 'RENAULT', value: 'RENAULT' },
+                { text: 'OPEL', value: 'OPEL' },
+                { text: 'SKODA', value: 'SKODA' },
+                { text: 'JEEP', value: 'JEEP' },
+                { text: 'TESLA', value: 'TESLA' },
+                { text: 'VOLVO', value: 'VOLVO' },
+                { text: 'LEXUS', value: 'LEXUS' },
               ]}
               value={coreService.make}
               onChange={coreService.setMake}
@@ -49,7 +56,15 @@ export const IndexPage: FC = () => {
           <FormField>
             <Dropdown
               placeholder="Year"
-              items={[{ text: '2004', value: '2004' }]}
+              items={[
+                { text: '2004', value: '2004' },
+                { text: '2005', value: '2005' },
+                { text: '2008', value: '2008' },
+                { text: '2010', value: '2010' },
+                { text: '2012', value: '2012' },
+                { text: '2014', value: '2014' },
+                { text: '2016', value: '2016' },
+              ]}
               value={coreService.year}
               onChange={coreService.setYear}
             />

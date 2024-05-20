@@ -1,11 +1,12 @@
 import clsx from 'clsx';
-import { FC, useCallback, useMemo, useRef, useState } from 'react';
+import { CSSProperties, FC, useCallback, useMemo, useRef, useState } from 'react';
 import useClickAway from 'react-use/lib/useClickAway';
 import { DropdownArrow } from './DropdownArrow';
 
 interface Props {
   placeholder?: string;
   emptyPlaceholder?: string;
+  maxPopupHeight?: number;
   items: ItemProps[];
   value?: string;
   onChange(value: string): void;
@@ -17,12 +18,21 @@ interface ItemProps {
 }
 
 export const Dropdown: FC<Props> = props => {
-  const { placeholder, emptyPlaceholder = 'No items', items, value, onChange } = props;
+  const { placeholder, emptyPlaceholder = 'No items', maxPopupHeight = 256, items, value, onChange } = props;
 
   const [opened, setOpened] = useState(false);
+  const [maxHeight, setMaxHeight] = useState<CSSProperties['maxHeight']>('none');
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const onInputClick = useCallback(() => setOpened(value => !value), [setOpened]);
+  const onInputClick = useCallback(() => {
+    if (containerRef.current) {
+      const bounds = containerRef.current.getBoundingClientRect();
+      const computedHeight = window.innerHeight - bounds.bottom;
+      setMaxHeight(Math.min(computedHeight, maxPopupHeight));
+    }
+
+    setOpened(value => !value);
+  }, [maxPopupHeight, setOpened, setMaxHeight]);
 
   const onItemClick = useCallback(
     (item: ItemProps) => {
@@ -61,9 +71,11 @@ export const Dropdown: FC<Props> = props => {
         </div>
         {opened && (
           <div className="tw-absolute tw-w-full">
-            <div className="tw-rounded-b tw-bg-input tw-text-white tw-border-2 tw-border-solid tw-border-input-focus tw-border-t-0 tw-mt-[-2px]">
-              <hr className="tw-border-input-divider tw-mx-2" />
-              <ul>
+            <div
+              className="tw-rounded-b tw-bg-input tw-text-white tw-border-2 tw-border-solid tw-border-input-focus tw-border-t-0 tw-mt-[-2px] tw-flex tw-items-stretch tw-flex-col"
+              style={{ maxHeight }}>
+              <hr className="tw-border-input-divider tw-mx-2 tw-flex-none" />
+              <ul className="tw-flex-1 tw-overflow-auto">
                 {items.length > 0 ? (
                   items.map(item => (
                     <li

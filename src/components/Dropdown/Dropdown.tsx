@@ -7,6 +7,7 @@ interface Props {
   placeholder?: string;
   emptyPlaceholder?: string;
   maxPopupHeight?: number;
+  popupScreenPadding?: number;
   items: ItemProps[];
   value?: string;
   onChange(value: string): void;
@@ -18,7 +19,15 @@ interface ItemProps {
 }
 
 export const Dropdown: FC<Props> = props => {
-  const { placeholder, emptyPlaceholder = 'No items', maxPopupHeight = 256, items, value, onChange } = props;
+  const {
+    placeholder,
+    emptyPlaceholder = 'No items',
+    maxPopupHeight = 256,
+    popupScreenPadding = 8,
+    items,
+    value,
+    onChange,
+  } = props;
 
   const [opened, setOpened] = useState(false);
   const [maxHeight, setMaxHeight] = useState<CSSProperties['maxHeight']>('none');
@@ -27,12 +36,12 @@ export const Dropdown: FC<Props> = props => {
   const onInputClick = useCallback(() => {
     if (containerRef.current) {
       const bounds = containerRef.current.getBoundingClientRect();
-      const computedHeight = window.innerHeight - bounds.bottom;
+      const computedHeight = window.innerHeight - bounds.bottom - popupScreenPadding;
       setMaxHeight(Math.min(computedHeight, maxPopupHeight));
     }
 
     setOpened(value => !value);
-  }, [maxPopupHeight, setOpened, setMaxHeight]);
+  }, [maxPopupHeight, popupScreenPadding, setOpened, setMaxHeight]);
 
   const onItemClick = useCallback(
     (item: ItemProps) => {
@@ -78,11 +87,12 @@ export const Dropdown: FC<Props> = props => {
               <ul className="tw-flex-1 tw-overflow-auto">
                 {items.length > 0 ? (
                   items.map(item => (
-                    <li
-                      key={item.value}
-                      className="tw-h-10 tw-px-4 tw-flex tw-items-center"
-                      onClick={() => onItemClick(item)}>
-                      {item.text}
+                    <li key={item.value}>
+                      <button
+                        className="tw-w-full tw-h-10 tw-px-4 tw-flex tw-items-center active:tw-bg-list-item-active"
+                        onClick={() => onItemClick(item)}>
+                        {item.text}
+                      </button>
                     </li>
                   ))
                 ) : (

@@ -20,6 +20,8 @@ p {
 }
 
 ::-webkit-scrollbar {
+  -webkit-overflow-scrolling: auto;
+
   @apply tw-w-0.5;
 }
 
@@ -29,8 +31,4 @@ p {
 
 ::-webkit-scrollbar-thumb {
   @apply tw-bg-scroll-bar tw-rounded;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  @apply tw-bg-scroll-bar;
 }

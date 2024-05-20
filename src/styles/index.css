@@ -43,6 +43,7 @@ body::-webkit-scrollbar {
   width: 10px;
   height: 10px;
   -webkit-appearance: none;
+  -webkit-overflow-scrolling: auto;
 }
 
 body::-webkit-scrollbar-thumb {

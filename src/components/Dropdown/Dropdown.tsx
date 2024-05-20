@@ -87,9 +87,9 @@ export const Dropdown: FC<Props> = props => {
               <ul className="tw-flex-1 tw-overflow-auto">
                 {items.length > 0 ? (
                   items.map(item => (
-                    <li key={item.value}>
+                    <li key={item.value} className="tw-px-2">
                       <button
-                        className="tw-w-full tw-h-10 tw-px-4 tw-flex tw-items-center active:tw-bg-list-item-active"
+                        className="tw-w-full tw-h-10 tw-rounded tw-px-2 tw-flex tw-items-center active:tw-bg-list-item-active active:tw-text-primary"
                         onClick={() => onItemClick(item)}>
                         {item.text}
                       </button>

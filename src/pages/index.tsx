@@ -1,5 +1,14 @@
-import { FC, useCallback, useEffect } from 'react';
-import { Button, CoreStep, CoreStepImage, Dropdown, FormField, Panel, SplashLogo } from '../components';
+import { FC, useCallback, useEffect, useMemo } from 'react';
+import {
+  Button,
+  CoreStep,
+  CoreStepImage,
+  Dropdown,
+  DropdownItemProps,
+  FormField,
+  Panel,
+  SplashLogo,
+} from '../components';
 import { CoreService } from '../services/CoreService';
 
 export const IndexPage: FC = () => {
@@ -10,62 +19,52 @@ export const IndexPage: FC = () => {
     coreService.start();
   }, []);
 
-  const onSplashOpened = useCallback(async () => {
-    await coreService.loadLookups();
-  }, []);
-
   const onProceed = useCallback(() => {
     coreService.saveVehicleParameters();
   }, []);
 
+  const brands = useMemo<DropdownItemProps[]>(
+    () => coreService.brands.map(brand => ({ value: brand.id, text: brand.title })),
+    [coreService.brands],
+  );
+
+  const models = useMemo<DropdownItemProps[]>(
+    () => coreService.models.map(model => ({ value: model.id, text: model.title })),
+    [coreService.models],
+  );
+
+  const years = useMemo<DropdownItemProps[]>(
+    () => coreService.years.map(year => ({ value: year.id, text: year.title })),
+    [coreService.years],
+  );
+
   return (
     <main className="tw-h-dvh tw-relative tw-overflow-hidden">
-      <SplashLogo open={coreService.step === 'splash'} onOpened={onSplashOpened} />
+      <SplashLogo open={coreService.step === 'splash'} onOpened={coreService.loadLookups} />
 
       <CoreStep open={coreService.step === 'setup'} className="tw-p-6">
         <Panel head="Select your car" className="tw-mt-8">
           <p>We need to ensure that the wheel selection matches your car</p>
           <FormField>
-            <Dropdown
-              placeholder="Make"
-              items={[
-                { text: 'AUDI', value: 'AUDI' },
-                { text: 'BMW', value: 'BMW' },
-                { text: 'MERCEDES-BENZ', value: 'MERCEDES-BENZ' },
-                { text: 'TOYOTA', value: 'TOYOTA' },
-                { text: 'RENAULT', value: 'RENAULT' },
-                { text: 'OPEL', value: 'OPEL' },
-                { text: 'SKODA', value: 'SKODA' },
-                { text: 'JEEP', value: 'JEEP' },
-                { text: 'TESLA', value: 'TESLA' },
-                { text: 'VOLVO', value: 'VOLVO' },
-                { text: 'LEXUS', value: 'LEXUS' },
-              ]}
-              value={coreService.make}
-              onChange={coreService.setMake}
-            />
+            <Dropdown placeholder="Make" items={brands} value={coreService.brand} onChange={coreService.setBrand} />
           </FormField>
           <FormField>
             <Dropdown
               placeholder="Model"
-              items={[{ text: 'Test', value: 'Test' }]}
+              items={models}
               value={coreService.model}
+              disabled={!coreService.brand}
+              loading={coreService.isLoadingModels}
               onChange={coreService.setModel}
             />
           </FormField>
           <FormField>
             <Dropdown
               placeholder="Year"
-              items={[
-                { text: '2004', value: '2004' },
-                { text: '2005', value: '2005' },
-                { text: '2008', value: '2008' },
-                { text: '2010', value: '2010' },
-                { text: '2012', value: '2012' },
-                { text: '2014', value: '2014' },
-                { text: '2016', value: '2016' },
-              ]}
+              items={years}
               value={coreService.year}
+              disabled={!coreService.model}
+              loading={coreService.isLoadingYears}
               onChange={coreService.setYear}
             />
           </FormField>

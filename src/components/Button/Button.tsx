@@ -15,7 +15,7 @@ export const Button: FC<PropsWithChildren<Props>> = props => {
       className={clsx(
         'tw-bg-action tw-rounded tw-uppercase tw-py-2 tw-px-8 tw-text-sm tw-font-medium',
         'tw-border-2 tw-border-solid tw-border-transparent active:tw-border-primary',
-        'disabled:tw-bg-button-disabled active:disabled:tw-border-transparent',
+        'disabled:tw-bg-control-disabled active:disabled:tw-border-transparent',
       )}
       onClick={onClick}>
       {children}

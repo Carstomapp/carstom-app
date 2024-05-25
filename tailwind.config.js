@@ -24,7 +24,7 @@ module.exports = {
         input: '#1D1D1D',
         'input-divider': '#7B7272',
         'input-focus': '#928F8CA1',
-        'button-disabled': '#595959',
+        'control-disabled': '#595959',
         'list-item-active': '#D7D7D70D',
       },
       backgroundImage: {
@@ -43,6 +43,7 @@ module.exports = {
         'core-step-image-open': 'core-step-image-open 500ms ease-in-out forwards',
         'core-step-image-close': 'core-step-image-close 500ms ease-in-out forwards',
         'backdrop-open': 'backdrop-open 150ms ease-in-out forwards',
+        spinner: 'spinner 500ms linear infinite',
       },
       keyframes: {
         'splash-logo-background-open': {
@@ -91,6 +92,10 @@ module.exports = {
         'backdrop-open': {
           '0%': { opacity: '0' },
           '100%': { opacity: '0.5' },
+        },
+        spinner: {
+          '0%': { transform: 'rotate(0)' },
+          '100%': { transform: 'rotate(360deg)' },
         },
       },
     },

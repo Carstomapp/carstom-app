@@ -18,38 +18,3 @@ body {
 p {
   @apply tw-mb-6;
 }
-
-/* ::-webkit-scrollbar {
-  -webkit-overflow-scrolling: auto;
-
-  @apply tw-w-0.5;
-}
-
-::-webkit-scrollbar-track {
-  @apply tw-bg-transparent tw-border-2 tw-border-solid tw-border-transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  @apply tw-bg-scroll-bar tw-rounded;
-} */
-
-body {
-  --scrollbar-foreground: red;
-  --scrollbar-background: #333;
-  scrollbar-color: var(--scrollbar-foreground) var(--scrollbar-background);
-}
-
-body::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-  -webkit-appearance: none;
-  -webkit-overflow-scrolling: auto;
-}
-
-body::-webkit-scrollbar-thumb {
-  background: var(--scrollbar-foreground);
-}
-
-body::-webkit-scrollbar-track {
-  background: var(--scrollbar-background);
-}

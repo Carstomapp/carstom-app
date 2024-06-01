@@ -12,7 +12,7 @@ export const DropdownSpinner: FC<Props> = props => {
     <div
       className={clsx(
         className,
-        'tw-rounded-full tw-border tw-border-solid tw-border-transparent tw-border-r-white tw-animate-spinner',
+        'tw-rounded-full tw-border tw-border-solid tw-border-transparent tw-border-r-white tw-animate-spinner-dropdown',
       )}
     />
   );

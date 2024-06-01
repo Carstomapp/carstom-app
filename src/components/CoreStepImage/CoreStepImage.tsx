@@ -11,7 +11,7 @@ interface Props {
 export const CoreStepImage: FC<Props> = props => {
   const { open, onOpened, onClosed } = props;
 
-  const { playState, playForward, hidden, onAnimationEnd } = useAnimation({
+  const { playState, playForward, onAnimationEnd } = useAnimation({
     title: 'step image',
     open,
     onOpened,

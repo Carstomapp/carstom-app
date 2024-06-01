@@ -7,6 +7,7 @@ import {
   DropdownItemProps,
   FormField,
   Panel,
+  Spinner,
   SplashLogo,
 } from '../components';
 import { CoreService } from '../services/CoreService';
@@ -75,8 +76,8 @@ export const IndexPage: FC = () => {
           </Button>
         </div>
       </CoreStep>
-      <CoreStep open={coreService.step === 'spinner'} className="tw-p-6">
-        Spinner
+      <CoreStep open={coreService.step === 'spinner'} onOpened={coreService.loadScene} className="tw-p-6">
+        <Spinner open={coreService.isLoadingScene} />
       </CoreStep>
 
       <CoreStepImage open={coreService.step === 'setup'} />

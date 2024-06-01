@@ -12,6 +12,7 @@ export interface CoreService {
   years: VehicleYear[];
   isLoadingModels: boolean;
   isLoadingYears: boolean;
+  isLoadingScene: boolean;
   start(): void;
   goTo(step: CoreStep): void;
   loadLookups(): Promise<void>;
@@ -19,6 +20,7 @@ export interface CoreService {
   setModel(model?: string): Promise<void>;
   setYear(year?: string): void;
   saveVehicleParameters(): void;
+  loadScene(): void;
 }
 
 export type CoreStep = 'initial' | 'splash' | 'setup' | 'spinner';
@@ -34,6 +36,7 @@ export const CoreService = {
     years: [],
     isLoadingModels: false,
     isLoadingYears: false,
+    isLoadingScene: false,
 
     start: () => {
       get().goTo('splash');
@@ -96,6 +99,10 @@ export const CoreService = {
 
     saveVehicleParameters: () => {
       get().goTo('spinner');
+    },
+
+    loadScene: () => {
+      set({ isLoadingScene: true });
     },
   })),
 

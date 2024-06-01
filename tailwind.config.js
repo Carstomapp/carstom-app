@@ -42,8 +42,11 @@ module.exports = {
         'core-step-close': 'core-step-close 500ms ease-in-out forwards',
         'core-step-image-open': 'core-step-image-open 500ms ease-in-out forwards',
         'core-step-image-close': 'core-step-image-close 500ms ease-in-out forwards',
+        'spinner-open': 'spinner-open 300ms ease-in-out forwards',
+        'spinner-close': 'spinner-close 300ms ease-in-out forwards',
         'backdrop-open': 'backdrop-open 150ms ease-in-out forwards',
-        spinner: 'spinner 500ms linear infinite',
+        'spinner-dropdown': 'spinner-dropdown 500ms linear infinite',
+        'spinner-large': 'spinner-large 3s linear infinite',
       },
       keyframes: {
         'splash-logo-background-open': {
@@ -89,13 +92,25 @@ module.exports = {
           '0%': { opacity: '1' },
           '100%': { opacity: '0' },
         },
+        'spinner-open': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        'spinner-close': {
+          '0%': { opacity: '1' },
+          '100%': { opacity: '0' },
+        },
         'backdrop-open': {
           '0%': { opacity: '0' },
           '100%': { opacity: '0.5' },
         },
-        spinner: {
+        'spinner-dropdown': {
           '0%': { transform: 'rotate(0)' },
           '100%': { transform: 'rotate(360deg)' },
+        },
+        'spinner-large': {
+          '0%': { transform: 'rotate(0)' },
+          '100%': { transform: 'rotate(-360deg)' },
         },
       },
     },

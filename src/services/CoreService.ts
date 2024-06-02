@@ -20,10 +20,10 @@ export interface CoreService {
   setModel(model?: string): Promise<void>;
   setYear(year?: string): void;
   saveVehicleParameters(): void;
-  loadScene(): void;
+  loadScene(): Promise<void>;
 }
 
-export type CoreStep = 'initial' | 'splash' | 'setup' | 'spinner';
+export type CoreStep = 'initial' | 'splash' | 'setup' | 'scene';
 
 export const CoreService = {
   use: create<CoreService>((set, get) => ({
@@ -98,11 +98,19 @@ export const CoreService = {
     },
 
     saveVehicleParameters: () => {
-      get().goTo('spinner');
+      get().goTo('scene');
     },
 
-    loadScene: () => {
+    loadScene: async () => {
       set({ isLoadingScene: true });
+
+      const { brand, model, year } = get();
+
+      if (brand && model && year) {
+        await VehiclesApi.getCollections(brand, model, year);
+      }
+
+      set({ isLoadingScene: false });
     },
   })),
 

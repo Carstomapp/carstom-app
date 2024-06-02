@@ -76,7 +76,7 @@ export const IndexPage: FC = () => {
           </Button>
         </div>
       </CoreStep>
-      <CoreStep open={coreService.step === 'spinner'} onOpened={coreService.loadScene} className="tw-p-6">
+      <CoreStep open={coreService.step === 'scene'} onOpened={coreService.loadScene} className="tw-p-6">
         <Spinner open={coreService.isLoadingScene} />
       </CoreStep>
 

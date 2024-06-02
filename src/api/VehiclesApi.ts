@@ -1,4 +1,4 @@
-import { VehicleBrand, VehicleModel, VehicleYear } from './types';
+import { Collection, VehicleBrand, VehicleModel, VehicleYear } from './types';
 
 export abstract class VehiclesApi {
   public static async getBrands(): Promise<VehicleBrand[]> {
@@ -60,6 +60,20 @@ export abstract class VehiclesApi {
                   { id: '2015', title: '2015' },
                 ],
           ),
+        1000,
+      );
+    });
+  }
+
+  public static async getCollections(brandId: string, modelId: string, yearId: string): Promise<Collection[]> {
+    return new Promise(resolve => {
+      setTimeout(
+        () =>
+          resolve([
+            { id: 'fw', title: 'FW Collection' },
+            { id: 'sx', title: 'SX Collection' },
+            { id: 'test', title: 'Test Collection' },
+          ]),
         1000,
       );
     });

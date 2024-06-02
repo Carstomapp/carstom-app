@@ -1,4 +1,4 @@
-import { CSSProperties, useCallback, useEffect, useState } from 'react';
+import { AnimationEvent, CSSProperties, useCallback, useEffect, useState } from 'react';
 import { Logger } from '../utils/Logger';
 
 interface Props {
@@ -13,7 +13,7 @@ interface Result {
   idleState: CSSProperties['animationPlayState'];
   playForward: boolean;
   hidden: boolean;
-  onAnimationEnd(): void;
+  onAnimationEnd(event: AnimationEvent): void;
 }
 
 export function useAnimation(props: Props): Result {
@@ -24,19 +24,26 @@ export function useAnimation(props: Props): Result {
   const [playForward, setPlayForward] = useState(true);
   const [hidden, setHidden] = useState(false);
 
-  const onAnimationEnd = useCallback(() => {
-    setPlayState('paused');
-    setPlayForward(true);
+  const onAnimationEnd = useCallback(
+    (event: AnimationEvent) => {
+      if (event.target !== event.currentTarget) {
+        return;
+      }
 
-    if (playForward) {
-      Logger.info(`End ${title} open animation`);
-      onOpened?.();
-    } else {
-      Logger.info(`End ${title} close animation`);
-      onClosed?.();
-      setHidden(true);
-    }
-  }, [title, onOpened, onClosed, playForward, setPlayState, setPlayForward, setHidden]);
+      setPlayState('paused');
+      setPlayForward(true);
+
+      if (playForward) {
+        Logger.info(`End ${title} open animation`);
+        onOpened?.();
+      } else {
+        Logger.info(`End ${title} close animation`);
+        onClosed?.();
+        setHidden(true);
+      }
+    },
+    [title, onOpened, onClosed, playForward, setPlayState, setPlayForward, setHidden],
+  );
 
   useEffect(() => {
     if (open && idleState === 'paused') {

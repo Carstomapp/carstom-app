@@ -20,7 +20,7 @@ export interface CoreService {
   setModel(model?: string): Promise<void>;
   setYear(year?: string): void;
   saveVehicleParameters(): void;
-  loadScene(): Promise<void>;
+  loadScene(onCameraInitialize?: () => Promise<void>): Promise<void>;
 }
 
 export type CoreStep = 'initial' | 'splash' | 'setup' | 'scene';
@@ -101,7 +101,7 @@ export const CoreService = {
       get().goTo('scene');
     },
 
-    loadScene: async () => {
+    loadScene: async (onCameraInitialize?: () => Promise<void>) => {
       set({ isLoadingScene: true });
 
       const { brand, model, year } = get();
@@ -109,6 +109,8 @@ export const CoreService = {
       if (brand && model && year) {
         await VehiclesApi.getCollections(brand, model, year);
       }
+
+      await onCameraInitialize?.();
 
       set({ isLoadingScene: false });
     },

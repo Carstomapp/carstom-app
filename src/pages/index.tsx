@@ -10,11 +10,14 @@ import {
   Spinner,
   SplashLogo,
 } from '../components';
+import { useCamera } from '../hooks';
 import { CoreService } from '../services/CoreService';
 
 export const IndexPage: FC = () => {
   const coreService = CoreService.use();
   const isValidSetup = CoreService.selectors.isValidSetup();
+
+  const { videoRef, onCameraInitialize } = useCamera();
 
   useEffect(() => {
     coreService.start();
@@ -23,6 +26,10 @@ export const IndexPage: FC = () => {
   const onProceed = useCallback(() => {
     coreService.saveVehicleParameters();
   }, []);
+
+  const onLoadScene = useCallback(async () => {
+    await coreService.loadScene(onCameraInitialize);
+  }, [onCameraInitialize]);
 
   const brands = useMemo<DropdownItemProps[]>(
     () => coreService.brands.map(brand => ({ value: brand.id, text: brand.title })),
@@ -76,8 +83,9 @@ export const IndexPage: FC = () => {
           </Button>
         </div>
       </CoreStep>
-      <CoreStep open={coreService.step === 'scene'} onOpened={coreService.loadScene} className="tw-p-6">
+      <CoreStep open={coreService.step === 'scene'} onOpened={onLoadScene} className="tw-p-6">
         <Spinner open={coreService.isLoadingScene} />
+        <video autoPlay ref={videoRef} />
       </CoreStep>
 
       <CoreStepImage open={coreService.step === 'setup'} />

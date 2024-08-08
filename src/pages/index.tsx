@@ -85,7 +85,7 @@ export const IndexPage: FC = () => {
       </CoreStep>
       <CoreStep open={coreService.step === 'scene'} onOpened={onLoadScene} className="tw-p-6">
         <div className="tw-absolute tw-inset-0 tw-flex tw-flex-col tw-items-stretch tw-justify-center tw-overflow-hidden">
-          <video className="tw-max-h-dvh tw-w-full tw-h-auto tw-object-contain" autoPlay ref={videoRef} />
+          <video className="tw-max-h-dvh tw-w-full tw-h-auto tw-object-contain" autoPlay playsInline ref={videoRef} />
         </div>
         <Spinner open={coreService.isLoadingScene} />
       </CoreStep>

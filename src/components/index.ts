@@ -1,4 +1,5 @@
 export * from './Button';
+export * from './Camera';
 export * from './CoreStep';
 export * from './CoreStepImage';
 export * from './Dropdown';

@@ -11,7 +11,7 @@ interface Props {
 export const Spinner: FC<Props> = props => {
   const { open, onOpened, onClosed } = props;
 
-  const { playState, playForward, onAnimationEnd } = useAnimation({
+  const { playState, playForward, hidden, onAnimationEnd } = useAnimation({
     title: 'spinner',
     open,
     onOpened,
@@ -22,6 +22,7 @@ export const Spinner: FC<Props> = props => {
     <div
       className={clsx(
         'tw-absolute tw-inset-0 tw-flex tw-flex-col tw-items-center tw-justify-center tw-overflow-hidden',
+        hidden && 'tw-hidden',
         playForward ? 'tw-animate-spinner-open' : 'tw-animate-spinner-close',
       )}
       style={{

@@ -18,3 +18,10 @@ body {
 p {
   @apply tw-mb-6;
 }
+
+*::-webkit-media-controls-panel,
+*::-webkit-media-controls-play-button,
+*::-webkit-media-controls-start-playback-button {
+  display: none !important;
+  -webkit-appearance: none;
+}

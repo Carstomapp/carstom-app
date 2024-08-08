@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { FC, useCallback, useEffect, useMemo } from 'react';
 import {
   Button,
@@ -84,7 +85,11 @@ export const IndexPage: FC = () => {
         </div>
       </CoreStep>
       <CoreStep open={coreService.step === 'scene'} onOpened={onLoadScene} className="tw-p-6">
-        <div className="tw-absolute tw-inset-0 tw-flex tw-flex-col tw-items-stretch tw-justify-center tw-overflow-hidden">
+        <div
+          className={clsx(
+            'tw-absolute tw-inset-0 tw-flex tw-flex-col tw-items-stretch tw-justify-center tw-overflow-hidden',
+            coreService.isLoadingScene && 'tw-hidden',
+          )}>
           <video className="tw-max-h-dvh tw-w-full tw-h-auto tw-object-contain" autoPlay playsInline ref={videoRef} />
         </div>
         <Spinner open={coreService.isLoadingScene} />

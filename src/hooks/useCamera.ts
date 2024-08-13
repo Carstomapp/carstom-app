@@ -1,14 +1,16 @@
-import { Ref, useCallback, useRef } from 'react';
+import { RefObject, useCallback, useRef } from 'react';
 import { errors } from '../constants';
 import { Logger } from '../utils/Logger';
 
 interface Result {
-  videoRef: Ref<HTMLVideoElement>;
+  videoRef: RefObject<HTMLVideoElement>;
+  canvasRef: RefObject<HTMLCanvasElement>;
   onCameraInitialize(): Promise<void>;
 }
 
 export function useCamera(): Result {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const onCameraInitialize = useCallback(async () => {
     if (!videoRef.current) {
@@ -34,6 +36,7 @@ export function useCamera(): Result {
 
   return {
     videoRef,
+    canvasRef,
     onCameraInitialize,
   };
 }

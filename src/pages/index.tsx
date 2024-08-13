@@ -18,7 +18,7 @@ export const IndexPage: FC = () => {
   const coreService = CoreService.use();
   const isValidSetup = CoreService.selectors.isValidSetup();
 
-  const { videoRef, onCameraInitialize } = useCamera();
+  const { videoRef, canvasRef, onCameraInitialize } = useCamera();
 
   useEffect(() => {
     coreService.start();
@@ -31,6 +31,10 @@ export const IndexPage: FC = () => {
   const onLoadScene = useCallback(async () => {
     await coreService.loadScene(onCameraInitialize);
   }, [onCameraInitialize]);
+
+  const onSceneFrame = useCallback(async (data: ImageData) => {
+    await coreService.processFrame(data);
+  }, []);
 
   const brands = useMemo<DropdownItemProps[]>(
     () => coreService.brands.map(brand => ({ value: brand.id, text: brand.title })),
@@ -85,7 +89,7 @@ export const IndexPage: FC = () => {
         </div>
       </CoreStep>
       <CoreStep open={coreService.step === 'scene'} onOpened={onLoadScene} className="tw-p-6">
-        <Camera hidden={coreService.isLoadingScene} videoRef={videoRef} />
+        <Camera hidden={coreService.isLoadingScene} videoRef={videoRef} canvasRef={canvasRef} onFrame={onSceneFrame} />
         <Spinner open={coreService.isLoadingScene} />
       </CoreStep>
 

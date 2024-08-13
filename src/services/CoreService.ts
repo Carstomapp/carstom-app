@@ -21,6 +21,7 @@ export interface CoreService {
   setYear(year?: string): void;
   saveVehicleParameters(): void;
   loadScene(onCameraInitialize?: () => Promise<void>): Promise<void>;
+  processFrame(data: ImageData): Promise<void>;
 }
 
 export type CoreStep = 'initial' | 'splash' | 'setup' | 'scene';
@@ -113,6 +114,10 @@ export const CoreService = {
       await onCameraInitialize?.();
 
       set({ isLoadingScene: false });
+    },
+
+    processFrame: async (data: ImageData) => {
+      // TODO: Pass camera frame to API
     },
   })),
 

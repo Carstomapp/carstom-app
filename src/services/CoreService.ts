@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { NNApi } from '../api/NNApi';
 import { VehiclesApi } from '../api/VehiclesApi';
 import { VehicleBrand, VehicleModel, VehicleYear } from '../api/types';
 
@@ -13,6 +14,7 @@ export interface CoreService {
   isLoadingModels: boolean;
   isLoadingYears: boolean;
   isLoadingScene: boolean;
+  isProcessing: boolean;
   start(): void;
   goTo(step: CoreStep): void;
   loadLookups(): Promise<void>;
@@ -21,7 +23,7 @@ export interface CoreService {
   setYear(year?: string): void;
   saveVehicleParameters(): void;
   loadScene(onCameraInitialize?: () => Promise<void>): Promise<void>;
-  processFrame(data: ImageData): Promise<void>;
+  processFrame(dataUrl: string): Promise<void>;
 }
 
 export type CoreStep = 'initial' | 'splash' | 'setup' | 'scene';
@@ -38,6 +40,7 @@ export const CoreService = {
     isLoadingModels: false,
     isLoadingYears: false,
     isLoadingScene: false,
+    isProcessing: false,
 
     start: () => {
       get().goTo('splash');
@@ -116,8 +119,14 @@ export const CoreService = {
       set({ isLoadingScene: false });
     },
 
-    processFrame: async (data: ImageData) => {
-      // TODO: Pass camera frame to API
+    processFrame: async (dataUrl: string) => {
+      set({ isProcessing: true });
+
+      await NNApi.processImage({
+        image: dataUrl,
+      });
+
+      set({ isProcessing: false });
     },
   })),
 

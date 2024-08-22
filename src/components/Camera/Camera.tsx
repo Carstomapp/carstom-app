@@ -6,7 +6,7 @@ interface Props {
   hidden?: boolean;
   videoRef?: RefObject<HTMLVideoElement>;
   canvasRef?: RefObject<HTMLCanvasElement>;
-  onFrame?(data: ImageData): Promise<void>;
+  onFrame?(dataUrl: string, data: ImageData): Promise<void>;
 }
 
 export const Camera: FC<Props> = props => {
@@ -31,8 +31,9 @@ export const Camera: FC<Props> = props => {
 
     context.drawImage(videoRef.current, 0, 0, width, height);
 
+    const dataUrl = canvasRef.current.toDataURL('image/png');
     const data = context.getImageData(0, 0, width, height);
-    await onFrame?.(data);
+    await onFrame?.(dataUrl, data);
   }, [onFrame]);
 
   return (

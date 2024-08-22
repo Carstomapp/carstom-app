@@ -32,8 +32,8 @@ export const IndexPage: FC = () => {
     await coreService.loadScene(onCameraInitialize);
   }, [onCameraInitialize]);
 
-  const onSceneFrame = useCallback(async (data: ImageData) => {
-    await coreService.processFrame(data);
+  const onSceneFrame = useCallback(async (dataUrl: string) => {
+    await coreService.processFrame(dataUrl);
   }, []);
 
   const brands = useMemo<DropdownItemProps[]>(

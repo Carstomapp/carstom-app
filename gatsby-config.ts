@@ -1,5 +1,10 @@
+import dotenv from 'dotenv';
 import type { GatsbyConfig } from 'gatsby';
 import { paths } from './src/constants';
+
+dotenv.config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
 
 const config: GatsbyConfig = {
   pathPrefix: paths.GATSBY_PATH_PREFIX,

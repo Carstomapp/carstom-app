@@ -6,7 +6,7 @@ export abstract class QueryString {
     return value ? String(value) : undefined;
   }
 
-  private static trimSource(source: string): string {
+  private static trimSource(source = ''): string {
     return source.startsWith('?') ? source.slice(1) : source;
   }
 }

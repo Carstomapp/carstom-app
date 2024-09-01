@@ -71,6 +71,8 @@ jobs:
         uses: actions/download-artifact@master
         with:
           name: local-files
+      - name: Temp
+        run: ls -lA
       - name: Setup environment
         run: |
           touch .env

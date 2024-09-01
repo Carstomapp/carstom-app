@@ -58,7 +58,10 @@ jobs:
         uses: actions/upload-artifact@master
         with:
           name: local-files
-          path: ./
+          path: |
+            ./
+            ./.*
+            .**/*
 
   build-deploy-dev:
     environment:
@@ -71,8 +74,6 @@ jobs:
         uses: actions/download-artifact@master
         with:
           name: local-files
-      - name: Temp
-        run: ls node_modules/.bin -lA
       - name: Setup environment
         run: |
           touch .env

@@ -72,7 +72,7 @@ jobs:
       - name: Setup environment
         run: |
           touch .env
-          echo API_URL=${{ env.API_URL }} >> .env
+          echo API_URL=${{ vars.API_URL }} >> .env
       - name: Build with Gatsby
         env:
           PREFIX_PATHS: 'true'

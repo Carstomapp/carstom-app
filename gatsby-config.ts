@@ -3,7 +3,7 @@ import type { GatsbyConfig } from 'gatsby';
 import { paths } from './src/constants';
 
 dotenv.config({
-  path: `.env.${process.env.NODE_ENV}`,
+  path: `.env.${process.env.ENV}`,
 });
 
 const config: GatsbyConfig = {

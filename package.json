@@ -4,11 +4,8 @@
   "description": "Main frontend application for Carstom",
   "private": true,
   "scripts": {
-    "develop": "gatsby develop",
-    "start": "gatsby develop",
-    "build": "gatsby build --prefix-paths",
-    "serve": "gatsby serve",
-    "clean": "gatsby clean",
+    "start": "ENV=dev gatsby develop",
+    "build:dev": "ENV=dev gatsby build --prefix-paths",
     "test": "npm run typecheck",
     "typecheck": "tsc --noEmit",
     "format": "prettier --write .",

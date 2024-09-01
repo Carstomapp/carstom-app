@@ -58,7 +58,7 @@ jobs:
         uses: actions/upload-artifact@master
         with:
           name: local-files
-          path: .
+          path: ./
 
   build-deploy-dev:
     environment:
@@ -71,7 +71,7 @@ jobs:
         uses: actions/download-artifact@master
         with:
           name: local-files
-          path: .
+          path: ./
       - name: Setup environment
         run: |
           touch .env

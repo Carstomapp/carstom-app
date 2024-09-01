@@ -72,7 +72,7 @@ jobs:
         with:
           name: local-files
       - name: Temp
-        run: ls -lA
+        run: ls node_modules/.bin -lA
       - name: Setup environment
         run: |
           touch .env

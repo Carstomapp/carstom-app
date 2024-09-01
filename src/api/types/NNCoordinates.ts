@@ -1,1 +1,4 @@
-export type NNCoordinates = [number, number];
+export interface NNCoordinates {
+  x: number;
+  y: number;
+}

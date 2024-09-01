@@ -29,13 +29,13 @@ Run local dev server
 npm start
 ```
 
-Navigate to `http://localhost:8000?t=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRlIjoiQXVndXN0MjIyMDI0In0.72PrIsfqiOsmlUIg0CjJqBpnfKfxK619clt7qhUhEBU`
+Navigate to `http://localhost:8000?t=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRlIjoiRGVjZW1iZXIwOTE5OTgifQ.CC7h56VvBreo6gA4nQA6C5i-x8q8bhfTwxTaoEzlIkE`
 
 ## Authentication
 
 Test auth tokens to use for local development
 
-- eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRlIjoiQXVndXN0MjIyMDI0In0.72PrIsfqiOsmlUIg0CjJqBpnfKfxK619clt7qhUhEBU
+- eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRlIjoiRGVjZW1iZXIwOTE5OTgifQ.CC7h56VvBreo6gA4nQA6C5i-x8q8bhfTwxTaoEzlIkE
 
 ## Contribution
 

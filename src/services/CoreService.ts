@@ -122,9 +122,9 @@ export const CoreService = {
     processFrame: async (dataUrl: string) => {
       set({ isProcessing: true });
 
-      await NNApi.processImage({
-        image: dataUrl,
-      });
+      // await NNApi.processImage({
+      //   image: dataUrl,
+      // });
 
       set({ isProcessing: false });
     },

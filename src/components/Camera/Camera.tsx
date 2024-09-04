@@ -43,7 +43,7 @@ export const Camera: FC<Props> = props => {
         hidden && 'tw-hidden',
       )}>
       <video
-        className="tw-max-h-dvh tw-w-full tw-h-auto tw-object-contain"
+        className="tw-w-full tw-h-dvh tw-object-cover"
         autoPlay
         playsInline
         controls={false}

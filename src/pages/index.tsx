@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import { FC, useCallback, useEffect, useMemo } from 'react';
 import {
+  AR,
   Button,
   Camera,
   CoreStep,
@@ -14,7 +15,7 @@ import {
   Spinner,
   SplashLogo,
 } from '../components';
-import { useCamera } from '../hooks';
+import { useAR, useCamera } from '../hooks';
 import { ARService } from '../services/ARService';
 import { CoreService } from '../services/CoreService';
 
@@ -24,9 +25,11 @@ export const IndexPage: FC = () => {
 
   const arService = ARService.use();
 
-  const { videoRef, canvasRef, onCameraInitialize, onCameraCleanup, onCameraShot } = useCamera({
+  const { videoRef, canvasRef, initializeCamera, cleanupCamera, captureCameraFrame } = useCamera({
     onFrame: arService.processFrame,
   });
+
+  const { arCanvasRef, sceneRef, cameraRef, rendererRef, initializeScene } = useAR();
 
   useEffect(() => {
     coreService.start();
@@ -37,13 +40,18 @@ export const IndexPage: FC = () => {
   }, []);
 
   const onLoadScene = useCallback(async () => {
-    await coreService.loadScene(onCameraInitialize);
-  }, [onCameraInitialize]);
+    await coreService.loadScene(initializeCamera);
+  }, [initializeCamera]);
+
+  const onCameraReady = useCallback(async () => {
+    coreService.showLayout();
+    await initializeScene();
+  }, [initializeScene]);
 
   const onReturnToSetup = useCallback(() => {
-    onCameraCleanup();
+    cleanupCamera();
     coreService.returnToSetup();
-  }, [onCameraCleanup]);
+  }, [cleanupCamera]);
 
   const brands = useMemo<DropdownItemProps[]>(
     () => coreService.brands.map(brand => ({ value: brand.id, text: brand.title })),
@@ -106,7 +114,15 @@ export const IndexPage: FC = () => {
           hidden={coreService.isCameraHidden}
           videoRef={videoRef}
           canvasRef={canvasRef}
-          onCameraReady={coreService.showLayout}
+          onCameraReady={onCameraReady}
+        />
+        <AR
+          hidden={coreService.isCameraHidden}
+          sceneRef={sceneRef}
+          cameraRef={cameraRef}
+          rendererRef={rendererRef}
+          coordinates={arService.coordinates}
+          canvasRef={arCanvasRef}
         />
         <LayoutHeader open={coreService.isShowingLayout} onSetupClick={onReturnToSetup} />
         <LayoutMain open={coreService.isShowingLayout}>
@@ -125,7 +141,7 @@ export const IndexPage: FC = () => {
                   },
                 )}
                 disabled={arService.isProcessing}
-                onClick={onCameraShot}>
+                onClick={captureCameraFrame}>
                 {arService.isProcessing ? (
                   <div className="tw-rounded-full tw-border tw-border-solid tw-border-transparent tw-border-r-white tw-animate-spinner-dropdown tw-w-16 tw-h-16" />
                 ) : (

@@ -22,6 +22,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-use": "^17.5.0",
+    "three": "^0.168.0",
     "zustand": "^4.5.2"
   },
   "devDependencies": {
@@ -30,6 +31,7 @@
     "@types/qs": "^6.9.15",
     "@types/react": "^18.2.67",
     "@types/react-dom": "^18.2.22",
+    "@types/three": "^0.168.0",
     "autoprefixer": "^10.4.17",
     "babel-preset-gatsby": "^3.12.0",
     "cssnano": "^6.1.0",

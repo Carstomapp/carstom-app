@@ -9,9 +9,9 @@ interface Props {
 interface Result {
   videoRef: RefObject<HTMLVideoElement>;
   canvasRef: RefObject<HTMLCanvasElement>;
-  onCameraInitialize(): Promise<void>;
-  onCameraCleanup(): void;
-  onCameraShot(): Promise<void>;
+  initializeCamera(): Promise<void>;
+  cleanupCamera(): void;
+  captureCameraFrame(): Promise<void>;
 }
 
 export function useCamera(props: Props): Result {
@@ -21,7 +21,7 @@ export function useCamera(props: Props): Result {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const streamRef = useRef<MediaStream>();
 
-  const onCameraInitialize = useCallback(async () => {
+  const initializeCamera = useCallback(async () => {
     if (!videoRef.current) {
       return;
     }
@@ -43,7 +43,7 @@ export function useCamera(props: Props): Result {
     }
   }, []);
 
-  const onCameraCleanup = useCallback(() => {
+  const cleanupCamera = useCallback(() => {
     if (streamRef.current) {
       streamRef.current.getTracks().forEach(track => {
         track.stop();
@@ -51,7 +51,7 @@ export function useCamera(props: Props): Result {
     }
   }, []);
 
-  const onCameraShot = useCallback(async () => {
+  const captureCameraFrame = useCallback(async () => {
     if (!canvasRef.current || !videoRef.current) {
       return;
     }
@@ -76,8 +76,8 @@ export function useCamera(props: Props): Result {
   return {
     videoRef,
     canvasRef,
-    onCameraInitialize,
-    onCameraCleanup,
-    onCameraShot,
+    initializeCamera,
+    cleanupCamera,
+    captureCameraFrame,
   };
 }

@@ -9,7 +9,7 @@ export const ErrorPage: FC = () => {
 
   return (
     <div className="tw-p-6 tw-h-dvh tw-flex tw-items-center tw-justify-start">
-      <ErrorMessage canGoHome={locationState.canGoHome}>{locationState.errorMessage}</ErrorMessage>
+      <ErrorMessage canGoHome={locationState?.canGoHome}>{locationState?.errorMessage}</ErrorMessage>
     </div>
   );
 };

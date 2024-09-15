@@ -19,7 +19,7 @@ export const LayoutMain: FC<Props> = props => {
     <section
       className={clsx(
         className,
-        'tw-absolute tw-bottom-0 tw-inset-x-0 tw-h-48 tw-bg-background tw-shadow-sm tw-shadow-action tw-rounded-t-lg',
+        'tw-absolute tw-bottom-0 tw-inset-x-0 tw-h-48 tw-bg-background tw-rounded-t-xl',
         hidden && 'tw-hidden',
         playForward ? 'tw-animate-layout-main-open' : 'tw-animate-layout-main-close',
       )}

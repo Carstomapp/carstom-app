@@ -7,10 +7,11 @@ interface Props {
   videoRef?: RefObject<HTMLVideoElement>;
   canvasRef?: RefObject<HTMLCanvasElement>;
   onFrame?(dataUrl: string, data: ImageData): Promise<void>;
+  onCameraReady?(): void;
 }
 
 export const Camera: FC<Props> = props => {
-  const { hidden, videoRef, canvasRef, onFrame } = props;
+  const { hidden, videoRef, canvasRef, onFrame, onCameraReady } = props;
 
   const onVideoCanPlay = useCallback(async () => {
     if (!videoRef?.current || !canvasRef?.current) {
@@ -33,8 +34,9 @@ export const Camera: FC<Props> = props => {
 
     const dataUrl = canvasRef.current.toDataURL('image/png');
     const data = context.getImageData(0, 0, width, height);
+    onCameraReady?.();
     await onFrame?.(dataUrl, data);
-  }, [onFrame]);
+  }, [onFrame, onCameraReady]);
 
   return (
     <div

@@ -90,7 +90,13 @@ export const IndexPage: FC = () => {
         </div>
       </CoreStep>
       <CoreStep open={coreService.step === 'scene'} onOpened={onLoadScene} className="tw-p-6">
-        <Camera hidden={coreService.isLoadingScene} videoRef={videoRef} canvasRef={canvasRef} onFrame={onSceneFrame} />
+        <Camera
+          hidden={coreService.isLoadingScene}
+          videoRef={videoRef}
+          canvasRef={canvasRef}
+          onFrame={onSceneFrame}
+          onCameraReady={coreService.showLayout}
+        />
         <LayoutHeader open={coreService.isShowingLayout} />
         <Spinner open={coreService.isLoadingScene} />
       </CoreStep>

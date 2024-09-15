@@ -24,6 +24,7 @@ export interface CoreService {
   setYear(year?: string): void;
   saveVehicleParameters(): void;
   loadScene(onCameraInitialize?: () => Promise<void>): Promise<void>;
+  showLayout(): void;
   processFrame(dataUrl: string): Promise<void>;
 }
 
@@ -118,10 +119,11 @@ export const CoreService = {
 
       await onCameraInitialize?.();
 
-      set({
-        isLoadingScene: false,
-        isShowingLayout: true,
-      });
+      set({ isLoadingScene: false });
+    },
+
+    showLayout: () => {
+      set({ isShowingLayout: true });
     },
 
     processFrame: async (dataUrl: string) => {

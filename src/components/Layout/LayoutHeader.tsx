@@ -28,10 +28,12 @@ export const LayoutHeader: FC<Props> = props => {
         animationPlayState: playState,
       }}
       onAnimationEnd={onAnimationEnd}>
-      <button className="active:tw-brightness-150" onClick={onSetupClick}>
+      <button type="button" className="active:tw-brightness-150" onClick={onSetupClick}>
         <img className="tw-w-auto tw-h-8 tw-object-contain" src="images/icon_car_setup.png" />
       </button>
-      <div>2</div>
+      <button type="button" className="active:tw-brightness-150 tw-mr-2">
+        <img className="tw-w-auto tw-h-6 tw-object-contain" src="images/icon_menu.svg" />
+      </button>
     </section>
   );
 };

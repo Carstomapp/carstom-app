@@ -118,7 +118,7 @@ export const IndexPage: FC = () => {
                 Point your camera at the car,
                 <br /> ensuring the wheels are in view
               </p>
-              <button className="tw-rounded-full tw-w-24 tw-h-24 tw-bg-background tw-text-primary tw-border-4 tw-border-solid tw-border-primary tw-uppercase tw-font-medium tw-text-lg tw-outline-dashed tw-outline-2 tw-outline-offset-2 tw-outline-border">
+              <button className="tw-rounded-full tw-w-24 tw-h-24 tw-bg-background tw-text-primary tw-border-4 tw-border-solid tw-border-primary tw-uppercase tw-font-medium tw-text-lg tw-outline-dashed tw-outline-2 tw-outline-offset-2 tw-outline-border active:tw-border-white active:tw-text-white">
                 Start
               </button>
             </div>

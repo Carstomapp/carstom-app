@@ -32,6 +32,7 @@ module.exports = {
         background: 'radial-gradient(35.76% 51.3% at 50% -1.3%, #292929 0.08%, #1d1d1d 100%)',
         panel:
           'linear-gradient(179.27deg, rgba(45, 44, 44, 0.77) 6.59%, rgba(83, 82, 82, 0.77) 38.7%, rgba(40, 40, 40, 0.77) 77.63%)',
+        'layout-main': 'linear-gradient(180deg, #000 0%, rgba(48, 48, 48, 0.75) 50.52%, rgba(0, 0, 0, 0.78) 100%)',
       },
       animation: {
         'splash-logo-background-open': 'splash-logo-background-open 500ms ease-in-out forwards',

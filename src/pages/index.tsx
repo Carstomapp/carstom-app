@@ -8,6 +8,7 @@ import {
   DropdownItemProps,
   FormField,
   LayoutHeader,
+  LayoutMain,
   Panel,
   Spinner,
   SplashLogo,
@@ -98,6 +99,7 @@ export const IndexPage: FC = () => {
           onCameraReady={coreService.showLayout}
         />
         <LayoutHeader open={coreService.isShowingLayout} />
+        <LayoutMain open={coreService.isShowingLayout} />
         <Spinner open={coreService.isLoadingScene} />
       </CoreStep>
 

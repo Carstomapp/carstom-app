@@ -51,6 +51,8 @@ module.exports = {
         'spinner-large': 'spinner-large 3s linear infinite',
         'layout-header-open': 'layout-header-open 500ms ease-in-out forwards',
         'layout-header-close': 'layout-header-close 500ms ease-in-out forwards',
+        'layout-main-open': 'layout-main-open 500ms ease-in-out forwards',
+        'layout-main-close': 'layout-main-close 500ms ease-in-out forwards',
       },
       keyframes: {
         'splash-logo-background-open': {
@@ -123,6 +125,14 @@ module.exports = {
         'layout-header-close': {
           '0%': { opacity: '1', transform: 'translateY(0)' },
           '100%': { opacity: '0', transform: 'translateY(-100%)' },
+        },
+        'layout-main-open': {
+          '0%': { opacity: '0', transform: 'translateY(100%)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        'layout-main-close': {
+          '0%': { opacity: '1', transform: 'translateY(0)' },
+          '100%': { opacity: '0', transform: 'translateY(100%)' },
         },
       },
     },

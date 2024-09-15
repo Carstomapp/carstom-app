@@ -1,3 +1,4 @@
+import { navigate } from 'gatsby';
 import { FC, PropsWithChildren, ReactNode, useCallback } from 'react';
 import { Navigation } from '../../utils';
 import { Button } from '../Button';
@@ -11,7 +12,7 @@ export const ErrorMessage: FC<PropsWithChildren<Props>> = props => {
   const { title = 'An error has occurred', canGoHome = true, children } = props;
 
   const onGoHomeClick = useCallback(() => {
-    Navigation.navigateWithToken('/');
+    navigate(Navigation.getRouteWithToken('/'));
   }, []);
 
   return (

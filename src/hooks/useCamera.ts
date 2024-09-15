@@ -56,7 +56,7 @@ export function useCamera(props: Props): Result {
       return;
     }
 
-    const context = canvasRef.current.getContext('2d');
+    const context = canvasRef.current.getContext('2d', { willReadFrequently: true });
 
     if (!context) {
       throw new Error(errors.CANVAS_2D_INITIALIZATION);

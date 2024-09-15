@@ -17,7 +17,7 @@ export abstract class VehiclesApi {
             { id: 'VOLVO', title: 'VOLVO' },
             { id: 'LEXUS', title: 'LEXUS' },
           ]),
-        1000,
+        100,
       );
     });
   }
@@ -35,7 +35,7 @@ export abstract class VehiclesApi {
                 ]
               : [{ id: 'Test', title: 'Test' }],
           ),
-        1000,
+        100,
       );
     });
   }
@@ -60,7 +60,7 @@ export abstract class VehiclesApi {
                   { id: '2015', title: '2015' },
                 ],
           ),
-        1000,
+        100,
       );
     });
   }

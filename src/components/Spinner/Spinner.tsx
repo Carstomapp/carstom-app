@@ -21,7 +21,7 @@ export const Spinner: FC<Props> = props => {
   return (
     <div
       className={clsx(
-        'tw-absolute tw-inset-0 tw-flex tw-flex-col tw-items-center tw-justify-center tw-overflow-hidden',
+        'tw-absolute tw-z-spinner-background tw-inset-0 tw-flex tw-flex-col tw-items-center tw-justify-center tw-overflow-hidden tw-bg-background',
         hidden && 'tw-hidden',
         playForward ? 'tw-animate-spinner-open' : 'tw-animate-spinner-close',
       )}

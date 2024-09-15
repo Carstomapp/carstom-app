@@ -7,6 +7,7 @@ import {
   Dropdown,
   DropdownItemProps,
   FormField,
+  LayoutHeader,
   Panel,
   Spinner,
   SplashLogo,
@@ -83,13 +84,14 @@ export const IndexPage: FC = () => {
           </FormField>
         </Panel>
         <div className="tw-flex tw-items-center tw-justify-end tw-mt-4">
-          <Button disabled={!isValidSetup} onClick={onProceed}>
+          <Button style="primary" disabled={!isValidSetup} onClick={onProceed}>
             Proceed
           </Button>
         </div>
       </CoreStep>
       <CoreStep open={coreService.step === 'scene'} onOpened={onLoadScene} className="tw-p-6">
         <Camera hidden={coreService.isLoadingScene} videoRef={videoRef} canvasRef={canvasRef} onFrame={onSceneFrame} />
+        <LayoutHeader open={coreService.isShowingLayout} />
         <Spinner open={coreService.isLoadingScene} />
       </CoreStep>
 

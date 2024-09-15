@@ -3,29 +3,26 @@ import { FC } from 'react';
 import { useAnimation } from '../../hooks';
 
 interface Props {
+  className?: string;
   open: boolean;
-  onOpened?(): void;
-  onClosed?(): void;
 }
 
-export const CoreStepImage: FC<Props> = props => {
-  const { open, onOpened, onClosed } = props;
+export const LayoutHeader: FC<Props> = props => {
+  const { className, open } = props;
 
   const { playState, playForward, hidden, onAnimationEnd } = useAnimation({
-    title: 'step image',
+    title: 'layout-header',
     open,
-    onOpened,
-    onClosed,
   });
 
   return (
-    <img
+    <section
       className={clsx(
-        'tw-absolute tw-top-0 tw-right-0 tw-w-1/2 tw-h-auto tw-object-contain',
+        className,
+        'tw-absolute tw-top-0 tw-inset-x-0 tw-h-12 tw-bg-background tw-shadow-lg tw-shadow-action',
         hidden && 'tw-hidden',
-        playForward ? 'tw-animate-core-step-image-open' : 'tw-animate-core-step-image-close',
+        playForward ? 'tw-animate-layout-header-open' : 'tw-animate-layout-header-close',
       )}
-      src="images/step_image.png"
       style={{
         animationPlayState: playState,
       }}

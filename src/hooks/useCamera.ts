@@ -1,6 +1,6 @@
 import { RefObject, useCallback, useRef } from 'react';
 import { errors } from '../constants';
-import { Logger } from '../utils/Logger';
+import { Logger } from '../utils';
 
 interface Result {
   videoRef: RefObject<HTMLVideoElement>;

@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { Logger } from '../../utils/Logger';
-import { QueryString } from '../../utils/QueryString';
+import { queryParams } from '../../constants';
+import { Logger, QueryString } from '../../utils';
 
-const token = QueryString.getString('t');
+const token = QueryString.getString(queryParams.TOKEN);
 
 Logger.info(`API initialization: ${process.env.GATSBY_API_URL}`);
 

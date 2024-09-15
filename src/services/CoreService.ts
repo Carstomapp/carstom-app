@@ -14,6 +14,7 @@ export interface CoreService {
   isLoadingModels: boolean;
   isLoadingYears: boolean;
   isLoadingScene: boolean;
+  isShowingLayout: boolean;
   isProcessing: boolean;
   start(): void;
   goTo(step: CoreStep): void;
@@ -40,6 +41,7 @@ export const CoreService = {
     isLoadingModels: false,
     isLoadingYears: false,
     isLoadingScene: false,
+    isShowingLayout: false,
     isProcessing: false,
 
     start: () => {
@@ -116,15 +118,18 @@ export const CoreService = {
 
       await onCameraInitialize?.();
 
-      set({ isLoadingScene: false });
+      set({
+        isLoadingScene: false,
+        isShowingLayout: true,
+      });
     },
 
     processFrame: async (dataUrl: string) => {
       set({ isProcessing: true });
 
-      // await NNApi.processImage({
-      //   image: dataUrl,
-      // });
+      await NNApi.processImage({
+        image: dataUrl,
+      });
 
       set({ isProcessing: false });
     },

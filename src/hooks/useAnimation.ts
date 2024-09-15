@@ -1,5 +1,5 @@
 import { AnimationEvent, CSSProperties, useCallback, useEffect, useState } from 'react';
-import { Logger } from '../utils/Logger';
+import { Logger } from '../utils';
 
 interface Props {
   title: string;

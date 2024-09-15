@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { FC, useCallback, useEffect, useMemo } from 'react';
 import {
   Button,
@@ -23,7 +24,9 @@ export const IndexPage: FC = () => {
 
   const arService = ARService.use();
 
-  const { videoRef, canvasRef, onCameraInitialize, onCameraCleanup } = useCamera();
+  const { videoRef, canvasRef, onCameraInitialize, onCameraCleanup, onCameraShot } = useCamera({
+    onFrame: arService.processFrame,
+  });
 
   useEffect(() => {
     coreService.start();
@@ -41,10 +44,6 @@ export const IndexPage: FC = () => {
     onCameraCleanup();
     coreService.returnToSetup();
   }, [onCameraCleanup]);
-
-  const onSceneFrame = useCallback(async (dataUrl: string) => {
-    await coreService.processFrame(dataUrl);
-  }, []);
 
   const brands = useMemo<DropdownItemProps[]>(
     () => coreService.brands.map(brand => ({ value: brand.id, text: brand.title })),
@@ -107,7 +106,6 @@ export const IndexPage: FC = () => {
           hidden={coreService.isCameraHidden}
           videoRef={videoRef}
           canvasRef={canvasRef}
-          onFrame={onSceneFrame}
           onCameraReady={coreService.showLayout}
         />
         <LayoutHeader open={coreService.isShowingLayout} onSetupClick={onReturnToSetup} />
@@ -118,8 +116,21 @@ export const IndexPage: FC = () => {
                 Point your camera at the car,
                 <br /> ensuring the wheels are in view
               </p>
-              <button className="tw-rounded-full tw-w-24 tw-h-24 tw-bg-background tw-text-primary tw-border-4 tw-border-solid tw-border-primary tw-uppercase tw-font-medium tw-text-lg tw-outline-dashed tw-outline-2 tw-outline-offset-2 tw-outline-border active:tw-border-white active:tw-text-white">
-                Start
+              <button
+                className={clsx(
+                  'tw-rounded-full tw-w-24 tw-h-24 tw-bg-background tw-text-primary tw-border-4 tw-border-solid tw-uppercase tw-font-medium tw-text-lg tw-outline-dashed tw-outline-2 tw-outline-offset-2 tw-outline-border active:tw-border-white active:tw-text-white tw-flex tw-items-center tw-justify-center',
+                  {
+                    'tw-border-primary': !arService.isProcessing,
+                    'tw-border-white': arService.isProcessing,
+                  },
+                )}
+                disabled={arService.isProcessing}
+                onClick={onCameraShot}>
+                {arService.isProcessing ? (
+                  <div className="tw-rounded-full tw-border tw-border-solid tw-border-transparent tw-border-r-white tw-animate-spinner-dropdown tw-w-16 tw-h-16" />
+                ) : (
+                  'Start'
+                )}
               </button>
             </div>
           )}

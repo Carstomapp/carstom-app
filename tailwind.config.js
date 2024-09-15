@@ -49,8 +49,8 @@ module.exports = {
         'backdrop-open': 'backdrop-open 150ms ease-in-out forwards',
         'spinner-dropdown': 'spinner-dropdown 500ms linear infinite',
         'spinner-large': 'spinner-large 3s linear infinite',
-        'layout-header-open': 'layout-header-open 300ms ease-in-out forwards',
-        'layout-header-close': 'layout-header-close 300ms ease-in-out forwards',
+        'layout-header-open': 'layout-header-open 500ms ease-in-out forwards',
+        'layout-header-close': 'layout-header-close 500ms ease-in-out forwards',
       },
       keyframes: {
         'splash-logo-background-open': {

@@ -13,12 +13,15 @@ export interface CoreService {
   years: VehicleYear[];
   isLoadingModels: boolean;
   isLoadingYears: boolean;
+  isReturn: boolean;
   isLoadingScene: boolean;
+  isCameraHidden: boolean;
   isShowingLayout: boolean;
   isProcessing: boolean;
   start(): void;
   goTo(step: CoreStep): void;
-  loadLookups(): Promise<void>;
+  loadSetup(): Promise<void>;
+  returnToSetup(): void;
   setBrand(brand?: string): Promise<void>;
   setModel(model?: string): Promise<void>;
   setYear(year?: string): void;
@@ -41,7 +44,9 @@ export const CoreService = {
     years: [],
     isLoadingModels: false,
     isLoadingYears: false,
+    isReturn: false,
     isLoadingScene: false,
+    isCameraHidden: true,
     isShowingLayout: false,
     isProcessing: false,
 
@@ -53,9 +58,19 @@ export const CoreService = {
       set({ step });
     },
 
-    loadLookups: async () => {
+    loadSetup: async () => {
       const brands = await VehiclesApi.getBrands();
       set({ brands });
+      get().goTo('setup');
+    },
+
+    returnToSetup: () => {
+      set({
+        isShowingLayout: false,
+        isReturn: true,
+        isCameraHidden: true,
+      });
+
       get().goTo('setup');
     },
 
@@ -105,11 +120,15 @@ export const CoreService = {
     },
 
     saveVehicleParameters: () => {
+      set({ isReturn: false });
       get().goTo('scene');
     },
 
     loadScene: async (onCameraInitialize?: () => Promise<void>) => {
-      set({ isLoadingScene: true });
+      set({
+        isLoadingScene: true,
+        isCameraHidden: true,
+      });
 
       const { brand, model, year } = get();
 
@@ -119,7 +138,10 @@ export const CoreService = {
 
       await onCameraInitialize?.();
 
-      set({ isLoadingScene: false });
+      set({
+        isLoadingScene: false,
+        isCameraHidden: false,
+      });
     },
 
     showLayout: () => {

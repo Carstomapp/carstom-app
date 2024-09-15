@@ -20,7 +20,7 @@ export const IndexPage: FC = () => {
   const coreService = CoreService.use();
   const isValidSetup = CoreService.selectors.isValidSetup();
 
-  const { videoRef, canvasRef, onCameraInitialize } = useCamera();
+  const { videoRef, canvasRef, onCameraInitialize, onCameraCleanup } = useCamera();
 
   useEffect(() => {
     coreService.start();
@@ -33,6 +33,11 @@ export const IndexPage: FC = () => {
   const onLoadScene = useCallback(async () => {
     await coreService.loadScene(onCameraInitialize);
   }, [onCameraInitialize]);
+
+  const onReturnToSetup = useCallback(() => {
+    onCameraCleanup();
+    coreService.returnToSetup();
+  }, [onCameraCleanup]);
 
   const onSceneFrame = useCallback(async (dataUrl: string) => {
     await coreService.processFrame(dataUrl);
@@ -55,9 +60,9 @@ export const IndexPage: FC = () => {
 
   return (
     <main className="tw-h-dvh tw-relative tw-overflow-hidden">
-      <SplashLogo open={coreService.step === 'splash'} onOpened={coreService.loadLookups} />
+      <SplashLogo open={coreService.step === 'splash'} onOpened={coreService.loadSetup} />
 
-      <CoreStep open={coreService.step === 'setup'} className="tw-p-6">
+      <CoreStep open={coreService.step === 'setup'} back={coreService.isReturn} className="tw-p-6">
         <Panel head="Select your car" className="tw-mt-8">
           <p>We need to ensure that the wheel selection matches your car</p>
           <FormField>
@@ -90,15 +95,19 @@ export const IndexPage: FC = () => {
           </Button>
         </div>
       </CoreStep>
-      <CoreStep open={coreService.step === 'scene'} onOpened={onLoadScene} className="tw-p-6">
+      <CoreStep
+        open={coreService.step === 'scene'}
+        back={coreService.isReturn}
+        onOpened={onLoadScene}
+        className="tw-p-6">
         <Camera
-          hidden={coreService.isLoadingScene}
+          hidden={coreService.isCameraHidden}
           videoRef={videoRef}
           canvasRef={canvasRef}
           onFrame={onSceneFrame}
           onCameraReady={coreService.showLayout}
         />
-        <LayoutHeader open={coreService.isShowingLayout} />
+        <LayoutHeader open={coreService.isShowingLayout} onSetupClick={onReturnToSetup} />
         <LayoutMain open={coreService.isShowingLayout} />
         <Spinner open={coreService.isLoadingScene} />
       </CoreStep>

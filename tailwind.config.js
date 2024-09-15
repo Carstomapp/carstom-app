@@ -43,6 +43,8 @@ module.exports = {
         'splash-logo-shine-close': 'splash-logo-shine-close 500ms ease-in-out forwards',
         'core-step-open': 'core-step-open 500ms ease-in-out forwards',
         'core-step-close': 'core-step-close 500ms ease-in-out forwards',
+        'core-step-return-open': 'core-step-return-open 500ms ease-in-out forwards',
+        'core-step-return-close': 'core-step-return-close 500ms ease-in-out forwards',
         'core-step-image-open': 'core-step-image-open 500ms ease-in-out forwards',
         'core-step-image-close': 'core-step-image-close 500ms ease-in-out forwards',
         'spinner-open': '500ms spinner-open 300ms ease-in-out both',
@@ -51,9 +53,9 @@ module.exports = {
         'spinner-dropdown': 'spinner-dropdown 500ms linear infinite',
         'spinner-large': 'spinner-large 3s linear infinite',
         'layout-header-open': 'layout-header-open 500ms ease-in-out forwards',
-        'layout-header-close': 'layout-header-close 500ms ease-in-out forwards',
+        'layout-header-close': 'layout-header-close 100ms ease-in-out forwards',
         'layout-main-open': 'layout-main-open 500ms ease-in-out forwards',
-        'layout-main-close': 'layout-main-close 500ms ease-in-out forwards',
+        'layout-main-close': 'layout-main-close 100ms ease-in-out forwards',
       },
       keyframes: {
         'splash-logo-background-open': {
@@ -90,6 +92,14 @@ module.exports = {
         'core-step-close': {
           '0%': { opacity: '1', transform: 'translateX(0)' },
           '100%': { opacity: '0', transform: 'translateX(-100%)' },
+        },
+        'core-step-return-open': {
+          '0%': { opacity: '0', transform: 'translateX(-100%)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
+        'core-step-return-close': {
+          '0%': { opacity: '1', transform: 'translateX(0)' },
+          '100%': { opacity: '0', transform: 'translateX(100%)' },
         },
         'core-step-image-open': {
           '0%': { opacity: '0' },

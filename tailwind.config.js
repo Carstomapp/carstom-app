@@ -23,6 +23,7 @@ module.exports = {
         primary: '#D0B88A',
         action: '#926F44',
         input: '#1D1D1D',
+        border: '#7F7F7F',
         'input-divider': '#7B7272',
         'input-focus': '#928F8CA1',
         'control-disabled': '#595959',

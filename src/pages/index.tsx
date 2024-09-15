@@ -14,11 +14,14 @@ import {
   SplashLogo,
 } from '../components';
 import { useCamera } from '../hooks';
+import { ARService } from '../services/ARService';
 import { CoreService } from '../services/CoreService';
 
 export const IndexPage: FC = () => {
   const coreService = CoreService.use();
   const isValidSetup = CoreService.selectors.isValidSetup();
+
+  const arService = ARService.use();
 
   const { videoRef, canvasRef, onCameraInitialize, onCameraCleanup } = useCamera();
 
@@ -108,7 +111,19 @@ export const IndexPage: FC = () => {
           onCameraReady={coreService.showLayout}
         />
         <LayoutHeader open={coreService.isShowingLayout} onSetupClick={onReturnToSetup} />
-        <LayoutMain open={coreService.isShowingLayout} />
+        <LayoutMain open={coreService.isShowingLayout}>
+          {arService.frameStatus === 'none' && (
+            <div className="tw-flex tw-flex-col tw-items-center tw-justify-center tw-h-full tw-gap-4">
+              <p className="tw-text-sm tw-text-center tw-m-0 tw-font-medium">
+                Point your camera at the car,
+                <br /> ensuring the wheels are in view
+              </p>
+              <button className="tw-rounded-full tw-w-24 tw-h-24 tw-bg-background tw-text-primary tw-border-4 tw-border-solid tw-border-primary tw-uppercase tw-font-medium tw-text-lg tw-outline-dashed tw-outline-2 tw-outline-offset-2 tw-outline-border">
+                Start
+              </button>
+            </div>
+          )}
+        </LayoutMain>
         <Spinner open={coreService.isLoadingScene} />
       </CoreStep>
 

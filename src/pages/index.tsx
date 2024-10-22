@@ -121,7 +121,8 @@ export const IndexPage: FC = () => {
           sceneRef={sceneRef}
           cameraRef={cameraRef}
           rendererRef={rendererRef}
-          coordinates={arService.coordinates}
+          coordinates={[{ x: 0, y: 0 }]}
+          //coordinates={arService.coordinates}
           canvasRef={arCanvasRef}
         />
         <LayoutHeader open={coreService.isShowingLayout} onSetupClick={onReturnToSetup} />

@@ -39,10 +39,16 @@ export const AR: FC<Props> = props => {
       sceneRef.current.add(cube);
       cameraRef.current.position.z = 5;
 
+      window.addEventListener('deviceorientation', event => {
+        const alpha = event.alpha ? THREE.MathUtils.degToRad(event.alpha) : 0; // z-axis (yaw)
+        const beta = event.beta ? THREE.MathUtils.degToRad(event.beta) : 0; // x-axis (pitch)
+        const gamma = event.gamma ? THREE.MathUtils.degToRad(event.gamma) : 0; // y-axis (roll)
+
+        cube.rotation.set(beta, gamma, alpha);
+      });
+
       function animate() {
         rendererRef.current!.render(sceneRef.current!, cameraRef.current!);
-        cube.rotation.x += 0.01;
-        cube.rotation.y += 0.01;
       }
       rendererRef.current.setAnimationLoop(animate);
       // TODO: Implement marker: end

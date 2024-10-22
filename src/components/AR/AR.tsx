@@ -40,7 +40,7 @@ export const AR: FC<Props> = props => {
       sceneRef.current.add(cube);
       cameraRef.current.position.z = 5;
 
-      console.log(window.DeviceOrientationEvent);
+      console.log(window.DeviceOrientationEvent.requestPermission);
       Device.requestDevicePermissions(window.DeviceOrientationEvent).then(() => {
         window.addEventListener('deviceorientation', event => {
           const alpha = event.alpha ? THREE.MathUtils.degToRad(event.alpha) : 0; // z-axis (yaw)

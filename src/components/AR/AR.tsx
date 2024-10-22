@@ -44,6 +44,7 @@ export const AR: FC<Props> = props => {
         const beta = event.beta ? THREE.MathUtils.degToRad(event.beta) : 0; // x-axis (pitch)
         const gamma = event.gamma ? THREE.MathUtils.degToRad(event.gamma) : 0; // y-axis (roll)
 
+        console.log(alpha, beta, gamma);
         cube.rotation.set(beta, gamma, alpha);
       });
 

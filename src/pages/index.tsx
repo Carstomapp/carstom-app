@@ -39,6 +39,11 @@ export const IndexPage: FC = () => {
     coreService.saveVehicleParameters();
   }, []);
 
+  const onStart = useCallback(async () => {
+    await arService.ensurePermissions();
+    await captureCameraFrame();
+  }, [captureCameraFrame]);
+
   const onLoadScene = useCallback(async () => {
     await coreService.loadScene(initializeCamera);
   }, [initializeCamera]);
@@ -142,7 +147,7 @@ export const IndexPage: FC = () => {
                   },
                 )}
                 disabled={arService.isProcessing}
-                onClick={captureCameraFrame}>
+                onClick={onStart}>
                 {arService.isProcessing ? (
                   <div className="tw-rounded-full tw-border tw-border-solid tw-border-transparent tw-border-r-white tw-animate-spinner-dropdown tw-w-16 tw-h-16" />
                 ) : (

@@ -40,15 +40,13 @@ export const AR: FC<Props> = props => {
       sceneRef.current.add(cube);
       cameraRef.current.position.z = 5;
 
-      Device.requestDevicePermissions(window.DeviceOrientationEvent).then(() => {
-        window.addEventListener('deviceorientation', event => {
-          const alpha = event.alpha ? THREE.MathUtils.degToRad(event.alpha) : 0; // z-axis (yaw)
-          const beta = event.beta ? THREE.MathUtils.degToRad(event.beta) : 0; // x-axis (pitch)
-          const gamma = event.gamma ? THREE.MathUtils.degToRad(event.gamma) : 0; // y-axis (roll)
+      window.addEventListener('deviceorientation', event => {
+        const alpha = event.alpha ? THREE.MathUtils.degToRad(event.alpha) : 0; // z-axis (yaw)
+        const beta = event.beta ? THREE.MathUtils.degToRad(event.beta) : 0; // x-axis (pitch)
+        const gamma = event.gamma ? THREE.MathUtils.degToRad(event.gamma) : 0; // y-axis (roll)
 
-          console.log(alpha, beta, gamma);
-          cube.rotation.set(beta, gamma, alpha);
-        });
+        console.log(alpha, beta, gamma);
+        cube.rotation.set(beta, gamma, alpha);
       });
 
       function animate() {

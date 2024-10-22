@@ -1,3 +1,4 @@
+export * from './Device';
 export * from './ErrorHandling';
 export * from './Logger';
 export * from './Navigation';

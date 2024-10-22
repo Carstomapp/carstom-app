@@ -127,6 +127,7 @@ export const IndexPage: FC = () => {
           cameraRef={cameraRef}
           rendererRef={rendererRef}
           coordinates={[{ x: 0, y: 0 }]}
+          // TODO: Restore
           //coordinates={arService.coordinates}
           canvasRef={arCanvasRef}
         />

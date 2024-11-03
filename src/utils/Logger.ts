@@ -12,19 +12,15 @@ export abstract class Logger {
   }
 
   public static setDuplicateTargetId(targetId: string | undefined): void {
-    if (!global.sessionStorage) {
-      return;
-    }
-
     if (targetId) {
-      global.sessionStorage.setItem(storageKeys.LOGGER_DUPLICATE_TARGET_ID, targetId);
+      global.sessionStorage?.setItem(storageKeys.LOGGER_DUPLICATE_TARGET_ID, targetId);
     } else {
-      global.sessionStorage.removeItem(storageKeys.LOGGER_DUPLICATE_TARGET_ID);
+      global.sessionStorage?.removeItem(storageKeys.LOGGER_DUPLICATE_TARGET_ID);
     }
   }
 
   private static duplicate(message: unknown): void {
-    const targetId = global.sessionStorage.getItem(storageKeys.LOGGER_DUPLICATE_TARGET_ID);
+    const targetId = global.sessionStorage?.getItem(storageKeys.LOGGER_DUPLICATE_TARGET_ID);
 
     if (!targetId) {
       return;

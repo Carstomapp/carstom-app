@@ -1,0 +1,3 @@
+export const storageKeys = {
+  LOGGER_DUPLICATE_TARGET_ID: 'LOGGER_DUPLICATE_TARGET_ID',
+};

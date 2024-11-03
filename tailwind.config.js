@@ -11,6 +11,7 @@ module.exports = {
         'dropdown-backdrop': 900,
         'dropdown-opened': 1000,
         'spinner-background': 10000,
+        logger: 100000,
       },
       spacing: {
         '30dvh': '30dvh',

@@ -123,6 +123,7 @@ export const IndexPage: FC = () => {
         />
         <AR
           hidden={coreService.isCameraHidden}
+          enableVisualLogger
           sceneRef={sceneRef}
           cameraRef={cameraRef}
           rendererRef={rendererRef}
